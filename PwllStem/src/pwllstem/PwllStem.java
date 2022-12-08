@@ -13,7 +13,7 @@ public class PwllStem {
     public static String filename = "csv/cog_metadata_0.0005_424736.csv";
     public static CSVReader reader;
 
-    //Data Variables
+    // Variable Declaration
     static int dataSize, variants, deltaData, omiData, alpData;
     static int engData, engVar, engDelta, engOmi, engAlp;
     static int walData, walVar, walDelta, walOmi, walAlp;
@@ -24,9 +24,9 @@ public class PwllStem {
     static int walPer, walVarPer, walDeltaPer, walOmiPer, walAlpPer;
     static int scoPer, scoVarPer, scoDeltaPer, scoOmiPer, scoAlpPer;
     static int nIrePer, nIreVarPer, nIreDeltaPer, nIreOmiPer, nIreAlpPer;
-
-    // Read the file into a list of strings
     public static List<String[]> rows;
+
+    // CSV Reader Initialization
     static {
         try {
             reader = new CSVReader(new FileReader(filename));
@@ -35,10 +35,9 @@ public class PwllStem {
             throw new RuntimeException(e);
         }
     }
-
+    // Count Rows with Values Function
     public static int cRwV(String[] values){
-        // Open the CSV file for reading
-        // Count the number of rows that contain all the values
+        //Counting
         int count = 0;
         for (String[] row : rows) {
             boolean found = true;
@@ -53,11 +52,12 @@ public class PwllStem {
             }
         }
 
-        // Close the reader to free up resources
+        // returns Count
 
         return count;
     }
     public static void main(String[] args){
+        //Variable Assignment
         dataSize = rows.size() - 1;
         engData = cRwV(new String[]{"England"});
         engPer = Math.round(((float) engData * 100f) / (float) dataSize);
@@ -105,7 +105,7 @@ public class PwllStem {
         deltaPer = Math.round(((float) deltaData * 100) / (float) variants);
         omiPer = Math.round(((float) omiData * 100f) / (float) variants);
         alpPer = Math.round(((float) alpData * 100f) / (float) variants);
-
+        // Printing Results to the console
         System.out.println("Data Size: " + (rows.size() - 1));
         System.out.println("Cases by Country:");
         System.out.println("England: " + engData + " (" + engPer + "%)");
