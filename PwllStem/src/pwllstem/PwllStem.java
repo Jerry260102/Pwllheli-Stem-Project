@@ -59,6 +59,7 @@ public class PwllStem {
     public static void main(String[] args){
         //Variable Assignment
         dataSize = rows.size() - 1;
+        // England
         engData = cRwV(new String[]{"England"});
         engPer = Math.round(((float) engData * 100f) / (float) dataSize);
         engDelta = cRwV(new String[]{"England", "Delta"});
@@ -69,6 +70,7 @@ public class PwllStem {
         engDeltaPer = Math.round(((float) engDelta * 100f) / (float) engVar);
         engAlpPer = Math.round(((float) engAlp * 100f) / (float) engVar);
         engOmiPer = Math.round(((float) engOmi * 100f) / (float) engVar);
+        // Wales
         walData = cRwV(new String[]{"Wales"});
         walPer = Math.round(((float) walData * 100f) / (float) dataSize);
         walDelta = cRwV(new String[]{"Wales", "Delta"});
@@ -79,7 +81,9 @@ public class PwllStem {
         walDeltaPer = Math.round(((float) walDelta * 100f) / (float) walVar);
         walAlpPer = Math.round(((float) walAlp * 100f) / (float) walVar);
         walOmiPer = Math.round(((float) walOmi * 100f) / (float) walVar);
+        // Scotland
         scoData = cRwV(new String[]{"Scotland"});
+        scoPer = Math.round(((float) scoData * 100f) / (float) dataSize);
         scoDelta = cRwV(new String[]{"Scotland", "Delta"});
         scoOmi = cRwV(new String[]{"Scotland", "Omicron"});
         scoAlp = cRwV(new String[]{"Scotland", "Alpha"});
@@ -88,7 +92,9 @@ public class PwllStem {
         scoDeltaPer = Math.round(((float) scoDelta * 100f) / (float) scoVar);
         scoAlpPer = Math.round(((float) scoAlp * 100f) / (float) scoVar);
         scoOmiPer = Math.round(((float) scoOmi * 100f) / (float) scoVar);
+        // Northern Ireland
         nIreData = cRwV(new String[]{"Northern_Ireland"});
+        nIrePer = Math.round(((float) nIreData * 100f) / (float) dataSize);
         nIreDelta = cRwV(new String[]{"Northern_Ireland", "Delta"});
         nIreOmi = cRwV(new String[]{"Northern_Ireland", "Omicron"});
         nIreAlp = cRwV(new String[]{"Northern_Ireland", "Alpha"});
@@ -100,6 +106,7 @@ public class PwllStem {
         deltaData = cRwV(new String[]{"Delta"});
         omiData = cRwV(new String[]{"Omicron"});
         alpData = cRwV(new String[]{"Alpha"});
+        // Variants
         variants = deltaData + omiData + alpData;
         varPer = Math.round(((float) variants * 100) / (float) dataSize);
         deltaPer = Math.round(((float) deltaData * 100) / (float) variants);
