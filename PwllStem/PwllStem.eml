@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" jdk="19" jdk_type="JavaSDK">
+	<output-test url="file://$MODULE_DIR$/out/test/PwllStem"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="opencsv-5.7.1.jar" scope="PROVIDED">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/opencsv-5.7.1.jar!/"/>
+	</lib>
+	<lib name="opencsv-5.7.1" scope="RUNTIME"/>
+	<lib name="commons-lang3-3.12.0.jar" scope="RUNTIME">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/commons-lang3-3.12.0.jar!/"/>
+	</lib>
+	<levels>
+		<level name="opencsv-5.7.1" value="project"/>
+	</levels>
+</component>
