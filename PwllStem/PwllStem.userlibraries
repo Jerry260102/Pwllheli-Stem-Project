@@ -3,5 +3,8 @@
   <library name="opencsv-5.7.1">
     <archive path="E:/GitHubRepos/Pwllheli-Stem-Project/PwllStem/lib/opencsv-5.7.1.jar" />
   </library>
+  <library name="xchart-3.8.2">
+    <archive path="E:/GitHubRepos/Pwllheli-Stem-Project/PwllStem/lib/xchart-3.8.2.jar.jar" />
+  </library>
 </eclipse-userlibraries>
 
