@@ -4,66 +4,18 @@ import org.knowm.xchart.PieChart;
 import org.knowm.xchart.PieChartBuilder;
 import org.knowm.xchart.SwingWrapper;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
-
+import javax.swing.*;
 import java.awt.*;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static pwllstem.preInit.*;
+
 public class PwllStem {
-    //File Reader init
-    public static String filename = "csv/cog_metadata_0.0005_424736.csv";
-    public static CSVReader reader;
 
-    // Variable Declaration
-    static int dataSize, unknown, deltaData, omiData, alpData;
-    static int engData, engUnknown, engDelta, engOmi, engAlp;
-    static int walData, walUnknown, walDelta, walOmi, walAlp;
-    static int scoData, scoUnknown, scoDelta, scoOmi, scoAlp;
-    static int nIreData, nIreUnknown, nIreDelta, nIreOmi, nIreAlp;
-    static int unknownPer, deltaPer, omiPer, alpPer;
-    static int engPer, engUnknownPer, engDeltaPer, engOmiPer, engAlpPer;
-    static int walPer, walUnknownPer, walDeltaPer, walOmiPer, walAlpPer;
-    static int scoPer, scoUnknownPer, scoDeltaPer, scoOmiPer, scoAlpPer;
-    static int nIrePer, nIreUnknownPer, nIreDeltaPer, nIreOmiPer, nIreAlpPer;
-    public static List<String[]> rows;
-
-    // CSV Reader Initialization
-    static {
-        try {
-            reader = new CSVReader(new FileReader(filename));
-            rows = reader.readAll();
-        } catch (IOException | CsvException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    // Count Rows with Values Function
-    public static int cRwV(String[] values){
-        //Counting
-        int count = 0;
-        for (String[] row : rows) {
-            boolean found = true;
-            for (String value : values) {
-                if (!Arrays.asList(row).toString().contains(value)) {
-                    found = false;
-                    break;
-                }
-            }
-            if (found) {
-                count++;
-            }
-        }
-
-        // returns Count
-
-        return count;
-    }
-    public static void main(String[] args){
-        //Variable Assignment
+    public static void varInit(){
+        // Variable Assignment
         dataSize = rows.size() - 1;
         // England
         engData = cRwV(new String[]{"England"});
@@ -118,8 +70,46 @@ public class PwllStem {
         deltaPer = Math.round(((float) deltaData * 100) / (float) dataSize);
         omiPer = Math.round(((float) omiData * 100f) / (float) dataSize);
         alpPer = Math.round(((float) alpData * 100f) / (float) dataSize);
+    }
+    public static void uiInit() {
+        frameMain = new JFrame("Main Frame");
+        panelMain = new JPanel(new GridBagLayout());
+        lblMain = new JLabel("Covid Cases");
+        lblMain.setFont(new Font("Arial", Font.PLAIN, 48));
+        btnUK = new JButton("UK");
+        btnWales = new JButton("Wales");
+        btnEngland = new JButton( "England");
+        btnScotland = new JButton("Scotland");
+        btnNIre = new JButton("Northern Ireland");
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        panelMain.add(lblMain, c);
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.CENTER;
+        panelMain.add(btnUK, c);
+        c.gridy = 2;
+        panelMain.add(btnWales, c);
+        c.gridy = 3;
+        panelMain.add(btnEngland, c);
+        c.gridy = 4;
+        panelMain.add(btnScotland, c);
+        c.gridy = 5;
+        panelMain.add(btnNIre, c);
+        frameMain.add(panelMain);
+        frameMain.setSize(400, 300);
+        frameMain.setLocationRelativeTo(null);
+        frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameMain.setVisible(true);
+    }
+    public static void main(String[] args){
+        //Variable Assignment
+        uiInit();
+        varInit();
+
+
         // Printing Results to the console
-        System.out.println("Data Size: " + (rows.size() - 1));
+        /*System.out.println("Data Size: " + (rows.size() - 1));
         System.out.println("Cases by Country:");
         System.out.println("England: " + engData + " (" + engPer + "%)");
         System.out.println("Variants in England: ");
@@ -149,7 +139,7 @@ public class PwllStem {
         System.out.println("Unknown: " + unknown + " (" + unknownPer + "%)");
         System.out.println("Delta: " + deltaData + " (" + deltaPer + "%)");
         System.out.println("Omicron: " + omiData + " (" + omiPer + "%)");
-        System.out.println("Alpha: " + alpData + " (" + alpPer + "%)");
+        System.out.println("Alpha: " + alpData + " (" + alpPer + "%)");*/
         PieChart pieChartCountries = new PieChartBuilder().width(400).height(300)
                 .title("Results by Country").build();
         pieChartCountries.addSeries("England", engPer);
@@ -201,4 +191,5 @@ public class PwllStem {
         charts.add(pieChartNIreVar);
         new SwingWrapper<PieChart>(charts).displayChartMatrix();
     }
+
 }
