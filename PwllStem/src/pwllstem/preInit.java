@@ -11,9 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class preInit {
+    // SpreadSheet Location
     public static String filename = "csv/cog_metadata_0.0005_424736.csv";
+    // Reader Variable Declaration
     public static CSVReader reader;
-
     // Variable Declaration
     static int dataSize, unknown, deltaData, omiData, alpData;
     static int engData, engUnknown, engDelta, engOmi, engAlp;
@@ -27,7 +28,7 @@ public class preInit {
     static int nIrePer, nIreUnknownPer, nIreDeltaPer, nIreOmiPer, nIreAlpPer;
     public static List<String[]> rows;
 
-    // CSV Reader Initialization
+    // CSV Reader preInitialization
     static {
         try {
             reader = new CSVReader(new FileReader(filename));
@@ -36,10 +37,12 @@ public class preInit {
             throw new RuntimeException(e);
         }
     }
+    // UI Variables Declaration
     public static JFrame frameMain, frameUK, frameWales, frameEngland, frameScotland, frameNIre ;
-    public static JPanel panelMain, panelUk, panelWales, panelEngland, panelScotland, panelNire;
-    public static JLabel lblMain, lblUKPanel, lblWalesPanel, lblEnglandPanel, lblScotlandPanel, lblNIrePanel;
+    public static JPanel panelMain, panelUK, panelWales, panelEngland, panelScotland, panelNire;
+    public static JLabel lblMain, lblUKPanel, lblCountryUKChart, lblVariantUkChart, lblWalesPanel, lblEnglandPanel, lblScotlandPanel, lblNIrePanel;
     public static JButton btnUK , btnWales, btnEngland, btnScotland, btnNIre;
+
     public static GridBagConstraints c;
     // Count Rows with Values Function
     public static int cRwV(String[] values){

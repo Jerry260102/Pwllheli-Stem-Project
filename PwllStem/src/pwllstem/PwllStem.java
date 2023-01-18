@@ -2,13 +2,11 @@ package pwllstem;
 
 import org.knowm.xchart.PieChart;
 import org.knowm.xchart.PieChartBuilder;
-import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.BitmapEncoder;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
 
 import static pwllstem.preInit.*;
 
@@ -72,15 +70,51 @@ public class PwllStem {
         alpPer = Math.round(((float) alpData * 100f) / (float) dataSize);
     }
     public static void uiInit() {
+        // Main UI Initialization
         frameMain = new JFrame("Main Frame");
         panelMain = new JPanel(new GridBagLayout());
+        // Main Label
         lblMain = new JLabel("Covid Cases");
         lblMain.setFont(new Font("Arial", Font.PLAIN, 48));
+        // UK Button
         btnUK = new JButton("UK");
+        btnUK.addActionListener(e -> {
+            // UK Sub UI Initialization
+            frameUK = new JFrame("UK Frame");
+            panelUK = new JPanel(new GridBagLayout());
+            lblUKPanel = new JLabel("Cases in UK");
+            lblUKPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+            lblCountryUKChart = new JLabel();
+            lblCountryUKChart.setIcon(new ImageIcon("./UKCountryPieChart.png"));
+            lblVariantUkChart = new JLabel();
+            lblVariantUkChart.setIcon(new ImageIcon("./UKVariantPieChart.png"));
+            c = new GridBagConstraints();
+            c.gridwidth = 3;
+            c.gridx = 0;
+            c.gridy = 0;
+            panelUK.add(lblUKPanel, c);
+            c.gridwidth = 1;
+            c.gridy = 1;
+            panelUK.add(lblCountryUKChart, c);
+            c.gridy = 0;
+            c.gridx = 1;
+            panelUK.add(Box.createHorizontalStrut(10),c);
+            c.gridx = 2;
+            c.gridy = 1;
+            panelUK.add(lblVariantUkChart, c);
+            frameUK.add(panelUK);
+            frameUK.setMinimumSize(new Dimension(500,200));
+            frameUK.setVisible(true);
+        });
+        // Wales Button
         btnWales = new JButton("Wales");
+        // England Button
         btnEngland = new JButton( "England");
+        // Scotland Button
         btnScotland = new JButton("Scotland");
+        // Northern Ireland Button
         btnNIre = new JButton("Northern Ireland");
+        // UI Layout
         c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
@@ -97,49 +131,18 @@ public class PwllStem {
         c.gridy = 5;
         panelMain.add(btnNIre, c);
         frameMain.add(panelMain);
-        frameMain.setSize(400, 300);
+        frameMain.setMinimumSize(new Dimension(400, 300));
         frameMain.setLocationRelativeTo(null);
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setVisible(true);
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         //Variable Assignment
         uiInit();
         varInit();
 
 
-        // Printing Results to the console
-        /*System.out.println("Data Size: " + (rows.size() - 1));
-        System.out.println("Cases by Country:");
-        System.out.println("England: " + engData + " (" + engPer + "%)");
-        System.out.println("Variants in England: ");
-        System.out.println("Unknown: " + unknown + " (" + "%)");
-        System.out.println("Delta: " + engDelta + " (" + engDeltaPer + "%)");
-        System.out.println("Omicron: " + engOmi + " (" + engOmiPer + "%)");
-        System.out.println("Alpha: " + engAlp + " (" + engAlpPer + "%)");
-        System.out.println("Wales: " + walData + " (" + walPer + "%)");
-        System.out.println("Variants in Wales: ");
-        System.out.println("Unknown: " + walUnknown + " (" + walUnknownPer + "%)");
-        System.out.println("Delta: " + walDelta + " (" + walDeltaPer + "%)");
-        System.out.println("Omicron: " + walOmi + " (" + walOmiPer + "%)");
-        System.out.println("Alpha: " + walAlp + " (" + walAlpPer + "%)");
-        System.out.println("Scotland: " + scoData + " (" + scoPer + "%)");
-        System.out.println("Variants in Scotland: ");
-        System.out.println("Unknown" + scoUnknown + " ("+scoUnknownPer+"%)");
-        System.out.println("Delta: " + scoDelta + " (" + scoDeltaPer + "%)");
-        System.out.println("Omicron: " + scoOmi + " (" + scoOmiPer + "%)");
-        System.out.println("Alpha: " + scoAlp + " (" + scoAlpPer + "%)");
-        System.out.println("Northern Ireland: " + nIreData + " (" + nIrePer + "%)");
-        System.out.println("Variants in Northern Ireland: ");
-        System.out.println("Unknown: " + nIreUnknown + " (" + nIreUnknownPer + "%)");
-        System.out.println("Delta: " + nIreDelta + " (" + nIreDeltaPer + "%)");
-        System.out.println("Omicron: " + nIreOmi + " (" + nIreOmiPer + "%)");
-        System.out.println("Alpha: " + nIreAlp + " (" + nIreAlpPer + "%)");
-        System.out.println("Cases by Variants: ");
-        System.out.println("Unknown: " + unknown + " (" + unknownPer + "%)");
-        System.out.println("Delta: " + deltaData + " (" + deltaPer + "%)");
-        System.out.println("Omicron: " + omiData + " (" + omiPer + "%)");
-        System.out.println("Alpha: " + alpData + " (" + alpPer + "%)");*/
+
         PieChart pieChartCountries = new PieChartBuilder().width(400).height(300)
                 .title("Results by Country").build();
         pieChartCountries.addSeries("England", engPer);
@@ -182,14 +185,11 @@ public class PwllStem {
         pieChartNIreVar.addSeries("Alpha", nIreAlpPer);
         pieChartNIreVar.addSeries("Delta", nIreDeltaPer);
         pieChartNIreVar.addSeries("Omicron", nIreOmiPer);
-        List<PieChart> charts = new ArrayList<PieChart>();
-        charts.add(pieChartCountries);
-        charts.add(pieChartVariants);
-        charts.add(pieChartEngVar);
-        charts.add(pieChartWalVar);
-        charts.add(pieChartScoVar);
-        charts.add(pieChartNIreVar);
-        new SwingWrapper<PieChart>(charts).displayChartMatrix();
+        BitmapEncoder.saveBitmapWithDPI(pieChartCountries, "./UKCountryPieChart", BitmapEncoder.BitmapFormat.PNG, 100);
+        BitmapEncoder.saveBitmapWithDPI(pieChartVariants, "./UKVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 100);
+        BitmapEncoder.saveBitmapWithDPI(pieChartEngVar, "./ENGVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 300);
+        BitmapEncoder.saveBitmapWithDPI(pieChartWalVar, "./WALVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 300);
+        BitmapEncoder.saveBitmapWithDPI(pieChartScoVar, "./SCOVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 300);
+        BitmapEncoder.saveBitmapWithDPI(pieChartNIreVar, "./NIREVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 300);
     }
-
 }

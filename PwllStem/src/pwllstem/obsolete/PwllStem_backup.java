@@ -95,5 +95,36 @@ public class PwllStem_backup {
         System.out.println("Percentage of Omicron cases: " + (Math.round(Omiper)));
         System.out.println("Percentage of Alpha cases: " + (Math.round(Alpper)));
     }
-    
+    // Printing Results to the console
+        /*System.out.println("Data Size: " + (rows.size() - 1));
+        System.out.println("Cases by Country:");
+        System.out.println("England: " + engData + " (" + engPer + "%)");
+        System.out.println("Variants in England: ");
+        System.out.println("Unknown: " + unknown + " (" + "%)");
+        System.out.println("Delta: " + engDelta + " (" + engDeltaPer + "%)");
+        System.out.println("Omicron: " + engOmi + " (" + engOmiPer + "%)");
+        System.out.println("Alpha: " + engAlp + " (" + engAlpPer + "%)");
+        System.out.println("Wales: " + walData + " (" + walPer + "%)");
+        System.out.println("Variants in Wales: ");
+        System.out.println("Unknown: " + walUnknown + " (" + walUnknownPer + "%)");
+        System.out.println("Delta: " + walDelta + " (" + walDeltaPer + "%)");
+        System.out.println("Omicron: " + walOmi + " (" + walOmiPer + "%)");
+        System.out.println("Alpha: " + walAlp + " (" + walAlpPer + "%)");
+        System.out.println("Scotland: " + scoData + " (" + scoPer + "%)");
+        System.out.println("Variants in Scotland: ");
+        System.out.println("Unknown" + scoUnknown + " ("+scoUnknownPer+"%)");
+        System.out.println("Delta: " + scoDelta + " (" + scoDeltaPer + "%)");
+        System.out.println("Omicron: " + scoOmi + " (" + scoOmiPer + "%)");
+        System.out.println("Alpha: " + scoAlp + " (" + scoAlpPer + "%)");
+        System.out.println("Northern Ireland: " + nIreData + " (" + nIrePer + "%)");
+        System.out.println("Variants in Northern Ireland: ");
+        System.out.println("Unknown: " + nIreUnknown + " (" + nIreUnknownPer + "%)");
+        System.out.println("Delta: " + nIreDelta + " (" + nIreDeltaPer + "%)");
+        System.out.println("Omicron: " + nIreOmi + " (" + nIreOmiPer + "%)");
+        System.out.println("Alpha: " + nIreAlp + " (" + nIreAlpPer + "%)");
+        System.out.println("Cases by Variants: ");
+        System.out.println("Unknown: " + unknown + " (" + unknownPer + "%)");
+        System.out.println("Delta: " + deltaData + " (" + deltaPer + "%)");
+        System.out.println("Omicron: " + omiData + " (" + omiPer + "%)");
+        System.out.println("Alpha: " + alpData + " (" + alpPer + "%)");*/
 }
