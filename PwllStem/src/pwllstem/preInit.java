@@ -40,7 +40,9 @@ public class preInit {
     // UI Variables Declaration
     public static JFrame frameMain, frameUK, frameWales, frameEngland, frameScotland, frameNIre ;
     public static JPanel panelMain, panelUK, panelWales, panelEngland, panelScotland, panelNire;
-    public static JLabel lblMain, lblUKPanel, lblCountryUKChart, lblVariantUkChart, lblWalesPanel, lblEnglandPanel, lblScotlandPanel, lblNIrePanel;
+    public static JLabel lblMain, lblUKPanel, lblCountryUKPieChart, lblVariantUKPieChart,
+            lblEnglandPanel, lblEnglandPieChart, lblWalesPanel, lblWalesPieChart,
+            lblScotlandPanel, lblScotlandPieChart, lblNIrePanel, lblNIrePieChart;
     public static JButton btnUK , btnWales, btnEngland, btnScotland, btnNIre;
 
     public static GridBagConstraints c;
