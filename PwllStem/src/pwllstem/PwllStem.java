@@ -1,7 +1,6 @@
 package pwllstem;
 
 import org.knowm.xchart.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -118,6 +117,16 @@ public class PwllStem {
         BitmapEncoder.saveBitmapWithDPI(pieChartScoVar, "./Pictures/SCOVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 100);
         BitmapEncoder.saveBitmapWithDPI(pieChartNIreVar, "./Pictures/NIREVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 100);
     }
+    public static void barChartsInit() throws IOException {
+        CategoryChart barChartVariants = new CategoryChartBuilder().width(400).height(300).title("Variants").build();
+        barChartVariants.getStyler().setLegendVisible(false);
+        barChartVariants.addSeries("Test", Arrays.asList(new String[] {"Alpha", "Delta", "Omicron", "Unknown"}), Arrays.asList(new Integer[] {alpPer, deltaPer, omiPer, unknownPer}));
+        CategoryChart barChartCountries = new CategoryChartBuilder().width(400).height(300).title("Countries").build();
+        barChartCountries.getStyler().setLegendVisible(false);
+        barChartCountries.addSeries("Test", Arrays.asList(new String[] {"Wales", "England", "Scotland", "N. Ireland"}), Arrays.asList(new Integer[] {walPer, engPer, scoPer, nIrePer}));
+        BitmapEncoder.saveBitmapWithDPI(barChartVariants, "./Pictures/UKVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+        BitmapEncoder.saveBitmapWithDPI(barChartCountries, "./Pictures/UKCountryBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+    }
     public static void mainUiInit() {
         // Main UI Initialization
         frameMain = new JFrame("Main Frame");
@@ -163,14 +172,31 @@ public class PwllStem {
         panelUK = new JPanel(new GridBagLayout());
         lblUKPanel = new JLabel("Cases in UK");
         lblUKPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.addChangeListener(event -> {
+            if (BarORPie.isSelected()){
+                BarORPie.setText("Pie");
+                lblVariantUKPieChart.setIcon(new ImageIcon("./Pictures/UKVariantBarChart.png"));
+                lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryBarChart.png"));
+
+            } else {
+                BarORPie.setText("Bar");
+                lblVariantUKPieChart.setIcon(new ImageIcon("./Pictures/UKVariantPieChart.png"));
+                lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryPieChart.png"));
+
+            }
+        });
         lblCountryUKPieChart = new JLabel();
         lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryPieChart.png"));
         lblVariantUKPieChart = new JLabel();
         lblVariantUKPieChart.setIcon(new ImageIcon("./Pictures/UKVariantPieChart.png"));
         c = new GridBagConstraints();
-        c.gridwidth = 3;
+
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 1;
+        panelUK.add(BarORPie,c);
+        c.gridwidth = 3;
         panelUK.add(lblUKPanel, c);
         c.gridwidth = 1;
         c.gridy = 1;
@@ -260,6 +286,7 @@ public class PwllStem {
         //Variable Assignment
         varInit();
         PieChartsInit();
+        barChartsInit();
         mainUiInit();
         UKUiInit();
         ENGUiInit();
