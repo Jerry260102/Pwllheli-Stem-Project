@@ -276,9 +276,7 @@ public class PwllStem {
     public static void ENGUiInit(){
         // UK Sub UI Initialization
         frameEngland = new JFrame("England Frame");
-        frameEngland.setSize(new Dimension(1280,720));
         panelEngland = new JPanel(new GridBagLayout());
-        panelEngland.setSize(new Dimension(1280, 720));
         lblEnglandPanel = new JLabel("Cases in England");
         lblEnglandPanel.setFont(new Font("Arial", Font.PLAIN, 48));
         lblEngTotalCases = new JLabel("Total Cases: "+engData);
@@ -305,12 +303,15 @@ public class PwllStem {
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.anchor = GridBagConstraints.NORTHWEST;
+        c.insets = new Insets(10,10,0,0);
         panelEngland.add(BarORPie, c);
         c.gridx = 2;
         c.anchor = GridBagConstraints.NORTHEAST;
+        c.insets = new Insets(10,0,0,10);
         panelEngland.add(lblEngTotalCases, c);
         c.gridx = 1;
         c.anchor = GridBagConstraints.NORTH;
+        c.insets = new Insets(10,0,0,0);
         panelEngland.add(lblEnglandPanel,c);
         c.gridx = 0;
         c.gridy = 1;
@@ -319,7 +320,7 @@ public class PwllStem {
         c.anchor = GridBagConstraints.CENTER;
         panelEngland.add(lblEnglandPieChart,c);
         frameEngland.add(panelEngland);
-
+        frameEngland.setSize(new Dimension(1280,720));
     }
     public static void WALUiInit(){
         // UK Sub UI Initialization
@@ -347,14 +348,25 @@ public class PwllStem {
         c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 1;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.anchor = GridBagConstraints.NORTHWEST;
+        c.insets = new Insets(10,10,0,0);
         panelWales.add(BarORPie, c);
         c.gridx = 2;
+        c.anchor = GridBagConstraints.NORTHEAST;
+        c.insets = new Insets(10,0,0,10);
         panelWales.add(lblWalTotalCases, c);
-        c.gridx = 0;
-        c.gridwidth = 3;
+        c.gridx = 1;
+        c.anchor = GridBagConstraints.NORTH;
+        c.insets = new Insets(10,0,0,0);
         panelWales.add(lblWalesPanel,c);
+        c.gridx = 0;
         c.gridy = 1;
+        c.gridwidth=3;
+        c.fill = GridBagConstraints.VERTICAL;
+        c.anchor = GridBagConstraints.CENTER;
         panelWales.add(lblWalesPieChart,c);
         frameWales.add(panelWales);
         frameWales.setSize(new Dimension(1280,720));
@@ -385,14 +397,25 @@ public class PwllStem {
         c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 1;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.anchor = GridBagConstraints.NORTHWEST;
+        c.insets = new Insets(10,10,0,0);
         panelScotland.add(BarORPie, c);
         c.gridx = 2;
+        c.anchor = GridBagConstraints.NORTHEAST;
+        c.insets = new Insets(10,0,0,10);
         panelScotland.add(lblScoTotalCases, c);
-        c.gridx = 0;
-        c.gridwidth = 3;
+        c.gridx = 1;
+        c.anchor = GridBagConstraints.NORTH;
+        c.insets = new Insets(10,0,0,0);
         panelScotland.add(lblScotlandPanel,c);
+        c.gridx = 0;
         c.gridy = 1;
+        c.gridwidth=3;
+        c.fill = GridBagConstraints.VERTICAL;
+        c.anchor = GridBagConstraints.CENTER;
         panelScotland.add(lblScotlandPieChart,c);
         frameScotland.add(panelScotland);
         frameScotland.setSize(new Dimension(1280,720));
@@ -423,14 +446,25 @@ public class PwllStem {
         c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 1;
-        panelNire.add(BarORPie, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.anchor = GridBagConstraints.NORTHWEST;
+        c.insets = new Insets(10,10,0,0);
+        panelScotland.add(BarORPie, c);
         c.gridx = 2;
+        c.anchor = GridBagConstraints.NORTHEAST;
+        c.insets = new Insets(10,0,0,10);
         panelNire.add(lblNIreTotalCases, c);
-        c.gridx = 0;
-        c.gridwidth = 3;
+        c.gridx = 1;
+        c.anchor = GridBagConstraints.NORTH;
+        c.insets = new Insets(10,0,0,0);
         panelNire.add(lblNIrePanel,c);
+        c.gridx = 0;
         c.gridy = 1;
+        c.gridwidth=3;
+        c.fill = GridBagConstraints.VERTICAL;
+        c.anchor = GridBagConstraints.CENTER;
         panelNire.add(lblNIrePieChart,c);
         frameNIre.add(panelNire);
         frameNIre.setSize(new Dimension(1280,720));
