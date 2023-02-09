@@ -27,7 +27,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="RUNTIME" name="commons-lang3-3.12.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="xchart-3.8.2" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
       <library>
         <CLASSES>
@@ -37,5 +36,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" scope="RUNTIME" name="xchart-3.8.2" level="project" />
   </component>
 </module>
