@@ -1,42 +1,24 @@
 package pwllstem;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class preInit {
     // SpreadSheet Location
     public static String filename = "csv/cog_metadata_0.0005_424736.csv";
-    // Reader Variable Declaration
-    public static CSVReader reader;
     // Variable Declaration
-    static int dataSize, unknown, deltaData, omiData, alpData;
-    static int engData, engUnknown, engDelta, engOmi, engAlp;
-    static int walData, walUnknown, walDelta, walOmi, walAlp;
-    static int scoData, scoUnknown, scoDelta, scoOmi, scoAlp;
-    static int nIreData, nIreUnknown, nIreDelta, nIreOmi, nIreAlp;
-    static int unknownPer, deltaPer, omiPer, alpPer;
-    static int engPer, engUnknownPer, engDeltaPer, engOmiPer, engAlpPer;
-    static int walPer, walUnknownPer, walDeltaPer, walOmiPer, walAlpPer;
-    static int scoPer, scoUnknownPer, scoDeltaPer, scoOmiPer, scoAlpPer;
-    static int nIrePer, nIreUnknownPer, nIreDeltaPer, nIreOmiPer, nIreAlpPer;
-    public static List<String[]> rows;
+    static int dataSize, unknown, deltaData, omiData, alpData,
+            engData, engUnknown, engDelta, engOmi, engAlp,
+            walData, walUnknown, walDelta, walOmi, walAlp,
+            scoData, scoUnknown, scoDelta, scoOmi, scoAlp,
+            nIreData, nIreUnknown, nIreDelta, nIreOmi, nIreAlp,
+            unknownPer, deltaPer, omiPer, alpPer,
+            engPer, engUnknownPer, engDeltaPer, engOmiPer, engAlpPer,
+            walPer, walUnknownPer, walDeltaPer, walOmiPer, walAlpPer,
+            scoPer, scoUnknownPer, scoDeltaPer, scoOmiPer, scoAlpPer,
+            nIrePer, nIreUnknownPer, nIreDeltaPer, nIreOmiPer, nIreAlpPer;
 
-    // CSV Reader preInitialization
-    static {
-        try {
-            reader = new CSVReader(new FileReader(filename));
-            rows = reader.readAll();
-        } catch (IOException | CsvException e) {
-            throw new RuntimeException(e);
-        }
-    }
     // UI Variables Declaration
     public static JFrame frameMain, frameUK, frameWales, frameEngland, frameScotland, frameNIre ;
     public static JPanel panelMain, panelUK, panelWales, panelEngland, panelScotland, panelNire;
@@ -47,24 +29,27 @@ public class preInit {
 
     public static GridBagConstraints c;
     // Count Rows with Values Function
-    public static int cRwV(String[] values){
-        //Counting
-        int count = 0;
-        for (String[] row : rows) {
-            boolean found = true;
-            for (String value : values) {
-                if (!Arrays.asList(row).toString().contains(value)) {
-                    found = false;
-                    break;
-                }
-            }
-            if (found) {
-                count++;
-            }
-        }
-
-        // returns Count
-
-        return count;
-    }
+//    public static int cRwV(String[] values) throws IOException, CsvValidationException {
+//        //Counting
+//        CSVReader reader = new CSVReader(new FileReader(filename));
+//        String[] nextLine;
+//        int count = 0;
+//        while((nextLine = reader.readNext())!=null) {
+//            boolean found = true;
+//            for (String value : values) {
+//                if (!Arrays.asList(nextLine).toString().contains(value)) {
+//                        found = false;
+//                        break;
+//                }
+//            }
+//                if (found) {
+//                    count++;
+//                }
+//            }
+//
+//
+//        // returns Count
+//
+//        return count;
+//    }
 }
