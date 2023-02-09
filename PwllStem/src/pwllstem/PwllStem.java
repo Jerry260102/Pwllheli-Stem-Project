@@ -118,14 +118,36 @@ public class PwllStem {
         BitmapEncoder.saveBitmapWithDPI(pieChartNIreVar, "./Pictures/NIREVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 100);
     }
     public static void barChartsInit() throws IOException {
-        CategoryChart barChartVariants = new CategoryChartBuilder().width(400).height(300).title("Variants").build();
+        CategoryChart barChartVariants = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
         barChartVariants.getStyler().setLegendVisible(false);
+        barChartVariants.getStyler().setSeriesColors(new Color[] {Color.BLUE});
         barChartVariants.addSeries("Test", Arrays.asList(new String[] {"Alpha", "Delta", "Omicron", "Unknown"}), Arrays.asList(new Integer[] {alpPer, deltaPer, omiPer, unknownPer}));
-        CategoryChart barChartCountries = new CategoryChartBuilder().width(400).height(300).title("Countries").build();
+        CategoryChart barChartCountries = new CategoryChartBuilder().width(400).height(300).title("Results by Country").build();
         barChartCountries.getStyler().setLegendVisible(false);
+        barChartCountries.getStyler().setSeriesColors(new Color[] {Color.BLUE});
         barChartCountries.addSeries("Test", Arrays.asList(new String[] {"Wales", "England", "Scotland", "N. Ireland"}), Arrays.asList(new Integer[] {walPer, engPer, scoPer, nIrePer}));
+        CategoryChart barChartEngVar = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        barChartEngVar.getStyler().setLegendVisible(false);
+        barChartEngVar.getStyler().setSeriesColors(new Color[] {Color.BLUE});
+        barChartEngVar.addSeries("Test", Arrays.asList(new String[] {"Alpha", "Delta", "Omicron", "Unknown"}), Arrays.asList(new Integer[] {engAlpPer, engDeltaPer, engOmiPer, engUnknownPer}));
+        CategoryChart barChartWalVar = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        barChartWalVar.getStyler().setLegendVisible(false);
+        barChartWalVar.getStyler().setSeriesColors(new Color[] {Color.BLUE});
+        barChartWalVar.addSeries("Test", Arrays.asList(new String[] {"Alpha", "Delta", "Omicron", "Unknown"}), Arrays.asList(new Integer[] {walAlpPer, walDeltaPer, walOmiPer, walUnknownPer}));
+        CategoryChart barChartScoVar = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        barChartScoVar.getStyler().setLegendVisible(false);
+        barChartScoVar.getStyler().setSeriesColors(new Color[] {Color.BLUE});
+        barChartScoVar.addSeries("Test", Arrays.asList(new String[] {"Alpha", "Delta", "Omicron", "Unknown"}), Arrays.asList(new Integer[] {scoAlpPer, scoDeltaPer, scoOmiPer, scoUnknownPer}));
+        CategoryChart barChartNIreVar = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        barChartNIreVar.getStyler().setLegendVisible(false);
+        barChartNIreVar.getStyler().setSeriesColors(new Color[] {Color.BLUE});
+        barChartNIreVar.addSeries("Test", Arrays.asList(new String[] {"Alpha", "Delta", "Omicron", "Unknown"}), Arrays.asList(new Integer[] {nIreAlpPer, nIreDeltaPer, nIreOmiPer, nIreUnknownPer}));
         BitmapEncoder.saveBitmapWithDPI(barChartVariants, "./Pictures/UKVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
         BitmapEncoder.saveBitmapWithDPI(barChartCountries, "./Pictures/UKCountryBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+        BitmapEncoder.saveBitmapWithDPI(barChartEngVar, "./Pictures/ENGVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+        BitmapEncoder.saveBitmapWithDPI(barChartWalVar, "./Pictures/WALVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+        BitmapEncoder.saveBitmapWithDPI(barChartScoVar, "./Pictures/SCOVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+        BitmapEncoder.saveBitmapWithDPI(barChartNIreVar, "./Pictures/NIREVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
     }
     public static void mainUiInit() {
         // Main UI Initialization
@@ -172,6 +194,9 @@ public class PwllStem {
         panelUK = new JPanel(new GridBagLayout());
         lblUKPanel = new JLabel("Cases in UK");
         lblUKPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblUKTotalCases = new JLabel("Total Cases: "+dataSize);
+        lblUKTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblUKTotalCases.setForeground(Color.RED);
         JToggleButton BarORPie = new JToggleButton("Bar");
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
@@ -196,6 +221,9 @@ public class PwllStem {
         c.gridy = 0;
         c.gridwidth = 1;
         panelUK.add(BarORPie,c);
+        c.gridx = 2;
+        panelUK.add(lblUKTotalCases,c);
+        c.gridx = 0;
         c.gridwidth = 3;
         panelUK.add(lblUKPanel, c);
         c.gridwidth = 1;
@@ -216,12 +244,32 @@ public class PwllStem {
         panelEngland = new JPanel(new GridBagLayout());
         lblEnglandPanel = new JLabel("Cases in England");
         lblEnglandPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblEngTotalCases = new JLabel("Total Cases: "+dataSize);
+        lblEngTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblEngTotalCases.setForeground(Color.RED);
+        JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.addChangeListener(event -> {
+            if (BarORPie.isSelected()){
+                BarORPie.setText("Pie");
+                lblEnglandPieChart.setIcon(new ImageIcon("./Pictures/ENGVariantBarChart.png"));
+
+            } else {
+                BarORPie.setText("Bar");
+                lblEnglandPieChart.setIcon(new ImageIcon("./Pictures/ENGVariantPieChart.png"));
+
+            }
+        });
         lblEnglandPieChart = new JLabel();
         lblEnglandPieChart.setIcon(new ImageIcon("./Pictures/ENGVariantPieChart.png"));
         c = new GridBagConstraints();
-        c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 1;
+        panelEngland.add(BarORPie, c);
+        c.gridx = 2;
+        panelEngland.add(lblEngTotalCases, c);
+        c.gridx = 0;
+        c.gridwidth = 3;
         panelEngland.add(lblEnglandPanel,c);
         c.gridy = 1;
         panelEngland.add(lblEnglandPieChart,c);
@@ -234,12 +282,32 @@ public class PwllStem {
         panelWales = new JPanel(new GridBagLayout());
         lblWalesPanel = new JLabel("Cases in Wales");
         lblWalesPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblWalTotalCases = new JLabel("Total Cases: "+dataSize);
+        lblWalTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblWalTotalCases.setForeground(Color.RED);
+        JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.addChangeListener(event -> {
+            if (BarORPie.isSelected()){
+                BarORPie.setText("Pie");
+                lblWalesPieChart.setIcon(new ImageIcon("./Pictures/WALVariantBarChart.png"));
+
+            } else {
+                BarORPie.setText("Bar");
+                lblWalesPieChart.setIcon(new ImageIcon("./Pictures/WALVariantPieChart.png"));
+
+            }
+        });
         lblWalesPieChart = new JLabel();
         lblWalesPieChart.setIcon(new ImageIcon("./Pictures/WALVariantPieChart.png"));
         c = new GridBagConstraints();
-        c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 1;
+        panelWales.add(BarORPie, c);
+        c.gridx = 2;
+        panelWales.add(lblWalTotalCases, c);
+        c.gridx = 0;
+        c.gridwidth = 3;
         panelWales.add(lblWalesPanel,c);
         c.gridy = 1;
         panelWales.add(lblWalesPieChart,c);
@@ -252,12 +320,32 @@ public class PwllStem {
         panelScotland = new JPanel(new GridBagLayout());
         lblScotlandPanel = new JLabel("Cases in Scotland");
         lblScotlandPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblScoTotalCases = new JLabel("Total Cases: "+dataSize);
+        lblScoTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblScoTotalCases.setForeground(Color.RED);
+        JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.addChangeListener(event -> {
+            if (BarORPie.isSelected()){
+                BarORPie.setText("Pie");
+                lblScotlandPieChart.setIcon(new ImageIcon("./Pictures/SCOVariantBarChart.png"));
+
+            } else {
+                BarORPie.setText("Bar");
+                lblScotlandPieChart.setIcon(new ImageIcon("./Pictures/SCOVariantPieChart.png"));
+
+            }
+        });
         lblScotlandPieChart = new JLabel();
         lblScotlandPieChart.setIcon(new ImageIcon("./Pictures/SCOVariantPieChart.png"));
         c = new GridBagConstraints();
-        c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 1;
+        panelScotland.add(BarORPie, c);
+        c.gridx = 2;
+        panelScotland.add(lblScoTotalCases, c);
+        c.gridx = 0;
+        c.gridwidth = 3;
         panelScotland.add(lblScotlandPanel,c);
         c.gridy = 1;
         panelScotland.add(lblScotlandPieChart,c);
@@ -270,12 +358,32 @@ public class PwllStem {
         panelNire = new JPanel(new GridBagLayout());
         lblNIrePanel = new JLabel("Cases in Northern Ireland");
         lblNIrePanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblNIreTotalCases = new JLabel("Total Cases: "+dataSize);
+        lblNIreTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblNIreTotalCases.setForeground(Color.RED);
+        JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.addChangeListener(event -> {
+            if (BarORPie.isSelected()){
+                BarORPie.setText("Pie");
+                lblNIrePieChart.setIcon(new ImageIcon("./Pictures/NIREVariantBarChart.png"));
+
+            } else {
+                BarORPie.setText("Bar");
+                lblNIrePieChart.setIcon(new ImageIcon("./Pictures/NIREVariantPieChart.png"));
+
+            }
+        });
         lblNIrePieChart = new JLabel();
         lblNIrePieChart.setIcon(new ImageIcon("./Pictures/NIREVariantPieChart.png"));
         c = new GridBagConstraints();
-        c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 1;
+        panelNire.add(BarORPie, c);
+        c.gridx = 2;
+        panelNire.add(lblNIreTotalCases, c);
+        c.gridx = 0;
+        c.gridwidth = 3;
         panelNire.add(lblNIrePanel,c);
         c.gridy = 1;
         panelNire.add(lblNIrePieChart,c);
