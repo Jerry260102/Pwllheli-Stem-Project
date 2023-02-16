@@ -177,6 +177,9 @@ public class PwllStem {
         frameMain = new JFrame("Main Frame");
         panelMain = new JPanel(new GridBagLayout());
         // Main Label
+        JButton btnAber = new JButton(new ImageIcon("./Pictures/aber.png"));
+        JButton btnLlandrillo = new JButton(new ImageIcon("./Pictures/llandrillo.png"));
+        JLabel lblEESW = new JLabel(new ImageIcon("./Pictures/eesw.png"));
         lblMain = new JLabel("Covid Cases");
         lblMain.setFont(new Font("Arial", Font.PLAIN, 48));
         // UK Button
@@ -193,9 +196,23 @@ public class PwllStem {
         c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 1;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.insets = new Insets(10, 10 , 0, 0);
+        c.anchor = GridBagConstraints.NORTHWEST;
+        panelMain.add(btnAber, c);
+        c.gridx = 2;
+        c.insets = new Insets(10, 0, 0, 10);
+        c.anchor = GridBagConstraints.NORTHEAST;
+        panelMain.add(btnLlandrillo, c);
+        c.gridx = 1;
+        c.insets = new Insets(10, 0, 0, 0);
+        c.anchor = GridBagConstraints.NORTH;
         panelMain.add(lblMain, c);
         c.gridy = 1;
-        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(0,0,0,0);
+        c.anchor = GridBagConstraints.NORTH;
         panelMain.add(btnUK, c);
         c.gridy = 2;
         panelMain.add(btnWales, c);
@@ -205,11 +222,26 @@ public class PwllStem {
         panelMain.add(btnScotland, c);
         c.gridy = 5;
         panelMain.add(btnNIre, c);
+        c.gridx = 0;
+//        c.weighty = 5.0;
+        c.gridy = 6;
+        c.anchor = GridBagConstraints.SOUTHWEST;
+        c.insets = new Insets(0, 10, 10, 0);
+        panelMain.add(lblEESW, c);
         frameMain.add(panelMain);
         frameMain.setSize(new Dimension(1280, 720));
         frameMain.setLocationRelativeTo(null);
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setVisible(true);
+
+        btnAber.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frameMain, "Prifysgol Aberystwyth University is our company sponsor for this project and has been a massive help in our understanding of how genome sequencing and handling big data works.",
+                    "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+        });
+        btnLlandrillo.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frameMain, "We are a group of students from Coleg Meirion-Dwyfor, who have been working on making this application to allow for easy-to-understand representation of data regarding the COVID genome.\nThis application will allow for anyone to read and gain a deeper understanding of how COVID works at any level",
+                    "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+        });
     }
     public static void UKUiInit(){
         // UK Sub UI Initialization
