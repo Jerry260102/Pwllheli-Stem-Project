@@ -215,11 +215,11 @@ public class PwllStem {
         c.anchor = GridBagConstraints.NORTH;
         panelMain.add(btnUK, c);
         c.gridy = 2;
-        panelMain.add(btnWales, c);
-        c.gridy = 3;
         panelMain.add(btnEngland, c);
-        c.gridy = 4;
+        c.gridy = 3;
         panelMain.add(btnScotland, c);
+        c.gridy = 4;
+        panelMain.add(btnWales, c);
         c.gridy = 5;
         panelMain.add(btnNIre, c);
         c.gridx = 0;
