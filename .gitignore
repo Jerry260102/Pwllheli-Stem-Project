@@ -2,5 +2,6 @@
 /PwllStem/build/
 /PwllStem-NetBeans/nbproject/private/
 /PwllStem-NetBeans/build/
+/PwllStem/csv/cog_metadata.csv
+/PwllStem/csv/cog_metadata.csv.gz
 
-PwllStem/csv/cog_metadata.csv

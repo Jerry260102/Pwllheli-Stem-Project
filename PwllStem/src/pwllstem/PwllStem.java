@@ -5,15 +5,31 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.knowm.xchart.*;
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileReader;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.net.URL;
+import java.nio.file.*;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.zip.GZIPInputStream;
 
 import static pwllstem.preInit.*;
 
 public class PwllStem {
+    private static int i = 0;
 
     public static void varInit() throws IOException, CsvValidationException {
+        System.out.println(Files.isRegularFile(Paths.get(filename)));
+        if(!Files.isRegularFile(Paths.get(filename))){
+            Path gzfilename = Paths.get("csv/cog_metadata.csv.gz");
+            InputStream in1 = new URL("https://cog-uk.s3.climb.ac.uk/phylogenetics/latest/cog_metadata.csv.gz").openStream();
+            Files.copy(in1, gzfilename, StandardCopyOption.REPLACE_EXISTING);
+            try(final OutputStream out = Files.newOutputStream(Path.of(filename));
+                final InputStream in2   = new GZIPInputStream(Files.newInputStream(gzfilename))) {
+                in2.transferTo(out);
+            }
+        }
         // Variable Assignment
         CSVReader reader = new CSVReader(new FileReader(filename));
         String[] nextLine;
@@ -22,8 +38,143 @@ public class PwllStem {
         walAlp = walDelta = walOmi = walUnknown = 0;
         scoAlp = scoDelta = scoOmi = scoUnknown = 0;
         nIreAlp = nIreDelta = nIreOmi = nIreUnknown = 0;
+        Alp202101 = Alp202102 = Alp202103 = Alp202104 = Alp202105 = Alp202106 = Alp202107 = Alp202108 = Alp202109 = Alp202110 = Alp202111 = Alp202112 = 0;
+        Alp202201 = Alp202202 = Alp202203 = Alp202204 = Alp202205 = Alp202206 = Alp202207 = Alp202208 = Alp202209 = Alp202210 = Alp202211 = Alp202212 = 0;
+        Delta202101 = Delta202102 = Delta202103 = Delta202104 = Delta202105 = Delta202106 = Delta202107 = Delta202108 = Delta202109 = Delta202110 = Delta202111 = Delta202112 = 0;
+        Delta202201 = Delta202202 = Delta202203 = Delta202204 = Delta202205 = Delta202206 = Delta202207 = Delta202208 = Delta202209 = Delta202210 = Delta202211 = Delta202212 = 0;
+        Omi202101 = Omi202102 = Omi202103 = Omi202104 = Omi202105 = Omi202106 = Omi202107 = Omi202108 = Omi202109 = Omi202110 = Omi202111 = Omi202112 = 0;
+        Omi202201 = Omi202202 = Omi202203 = Omi202204 = Omi202205 = Omi202206 = Omi202207 = Omi202208 = Omi202209 = Omi202210 = Omi202211 = Omi202212 = 0;
+        Unk202101 = Unk202102 = Unk202103 = Unk202104 = Unk202105 = Unk202106 = Unk202107 = Unk202108 = Unk202109 = Unk202110 = Unk202111 = Unk202112 = 0;
+        Unk202201 = Unk202202 = Unk202203 = Unk202204 = Unk202205 = Unk202206 = Unk202207 = Unk202208 = Unk202209 = Unk202210 = Unk202211 = Unk202212 = 0;
+        int temp1 = 0, temp2 = 0, temp3 = 0, temp4 = 0, temp5 = 0, temp6 = 0, temp7 = 0, temp8 = 0, temp9 = 0, temp10 = 0, temp11 = 0, temp12 = 0,
+                temp13 = 0, temp14 = 0, temp15 = 0, temp16 = 0, temp17 = 0, temp18 = 0, temp19 = 0, temp20 = 0, temp21 = 0, temp22 = 0, temp23 = 0, temp24 = 0;
+
         while((nextLine = reader.readNext())!=null){
             String nl = Arrays.asList(nextLine).toString();
+            if(nextLine[4].contains("2021-01")) temp1+=1;
+            if(nextLine[4].contains("2021-02")) temp2+=1;
+            if(nextLine[4].contains("2021-03")) temp3+=1;
+            if(nextLine[4].contains("2021-04")) temp4+=1;
+            if(nextLine[4].contains("2021-05")) temp5+=1;
+            if(nextLine[4].contains("2021-06")) temp6+=1;
+            if(nextLine[4].contains("2021-07")) temp7+=1;
+            if(nextLine[4].contains("2021-08")) temp8+=1;
+            if(nextLine[4].contains("2021-09")) temp9+=1;
+            if(nextLine[4].contains("2021-10")) temp10+=1;
+            if(nextLine[4].contains("2021-11")) temp11+=1;
+            if(nextLine[4].contains("2021-12")) temp12+=1;
+            if(nextLine[4].contains("2022-01")) temp13+=1;
+            if(nextLine[4].contains("2022-02")) temp14+=1;
+            if(nextLine[4].contains("2022-03")) temp15+=1;
+            if(nextLine[4].contains("2022-04")) temp16+=1;
+            if(nextLine[4].contains("2022-05")) temp17+=1;
+            if(nextLine[4].contains("2022-06")) temp18+=1;
+            if(nextLine[4].contains("2022-07")) temp19+=1;
+            if(nextLine[4].contains("2022-08")) temp20+=1;
+            if(nextLine[4].contains("2022-09")) temp21+=1;
+            if(nextLine[4].contains("2022-10")) temp22+=1;
+            if(nextLine[4].contains("2022-11")) temp23+=1;
+            if(nextLine[4].contains("2022-12")) temp24+=1;
+
+            if(nextLine[4].contains("2021-01") && nl.contains("Alpha")) Alp202101+=1;
+            if(nextLine[4].contains("2021-02") && nl.contains("Alpha")) Alp202102+=1;
+            if(nextLine[4].contains("2021-03") && nl.contains("Alpha")) Alp202103+=1;
+            if(nextLine[4].contains("2021-04") && nl.contains("Alpha")) Alp202104+=1;
+            if(nextLine[4].contains("2021-05") && nl.contains("Alpha")) Alp202105+=1;
+            if(nextLine[4].contains("2021-06") && nl.contains("Alpha")) Alp202106+=1;
+            if(nextLine[4].contains("2021-07") && nl.contains("Alpha")) Alp202107+=1;
+            if(nextLine[4].contains("2021-08") && nl.contains("Alpha")) Alp202108+=1;
+            if(nextLine[4].contains("2021-09") && nl.contains("Alpha")) Alp202109+=1;
+            if(nextLine[4].contains("2021-10") && nl.contains("Alpha")) Alp202110+=1;
+            if(nextLine[4].contains("2021-11") && nl.contains("Alpha")) Alp202111+=1;
+            if(nextLine[4].contains("2021-12") && nl.contains("Alpha")) Alp202112+=1;
+            if(nextLine[4].contains("2022-01") && nl.contains("Alpha")) Alp202201+=1;
+            if(nextLine[4].contains("2022-02") && nl.contains("Alpha")) Alp202202+=1;
+            if(nextLine[4].contains("2022-03") && nl.contains("Alpha")) Alp202203+=1;
+            if(nextLine[4].contains("2022-04") && nl.contains("Alpha")) Alp202204+=1;
+            if(nextLine[4].contains("2022-05") && nl.contains("Alpha")) Alp202205+=1;
+            if(nextLine[4].contains("2022-06") && nl.contains("Alpha")) Alp202206+=1;
+            if(nextLine[4].contains("2022-07") && nl.contains("Alpha")) Alp202207+=1;
+            if(nextLine[4].contains("2022-08") && nl.contains("Alpha")) Alp202208+=1;
+            if(nextLine[4].contains("2022-09") && nl.contains("Alpha")) Alp202209+=1;
+            if(nextLine[4].contains("2022-10") && nl.contains("Alpha")) Alp202210+=1;
+            if(nextLine[4].contains("2022-11") && nl.contains("Alpha")) Alp202211+=1;
+            if(nextLine[4].contains("2022-12") && nl.contains("Alpha")) Alp202212+=1;
+
+            if(nextLine[4].contains("2021-01") && nl.contains("Delta")) Delta202101+=1;
+            if(nextLine[4].contains("2021-02") && nl.contains("Delta")) Delta202102+=1;
+            if(nextLine[4].contains("2021-03") && nl.contains("Delta")) Delta202103+=1;
+            if(nextLine[4].contains("2021-04") && nl.contains("Delta")) Delta202104+=1;
+            if(nextLine[4].contains("2021-05") && nl.contains("Delta")) Delta202105+=1;
+            if(nextLine[4].contains("2021-06") && nl.contains("Delta")) Delta202106+=1;
+            if(nextLine[4].contains("2021-07") && nl.contains("Delta")) Delta202107+=1;
+            if(nextLine[4].contains("2021-08") && nl.contains("Delta")) Delta202108+=1;
+            if(nextLine[4].contains("2021-09") && nl.contains("Delta")) Delta202109+=1;
+            if(nextLine[4].contains("2021-10") && nl.contains("Delta")) Delta202110+=1;
+            if(nextLine[4].contains("2021-11") && nl.contains("Delta")) Delta202111+=1;
+            if(nextLine[4].contains("2021-12") && nl.contains("Delta")) Delta202112+=1;
+            if(nextLine[4].contains("2022-01") && nl.contains("Delta")) Delta202201+=1;
+            if(nextLine[4].contains("2022-02") && nl.contains("Delta")) Delta202202+=1;
+            if(nextLine[4].contains("2022-03") && nl.contains("Delta")) Delta202203+=1;
+            if(nextLine[4].contains("2022-04") && nl.contains("Delta")) Delta202204+=1;
+            if(nextLine[4].contains("2022-05") && nl.contains("Delta")) Delta202205+=1;
+            if(nextLine[4].contains("2022-06") && nl.contains("Delta")) Delta202206+=1;
+            if(nextLine[4].contains("2022-07") && nl.contains("Delta")) Delta202207+=1;
+            if(nextLine[4].contains("2022-08") && nl.contains("Delta")) Delta202208+=1;
+            if(nextLine[4].contains("2022-09") && nl.contains("Delta")) Delta202209+=1;
+            if(nextLine[4].contains("2022-10") && nl.contains("Delta")) Delta202210+=1;
+            if(nextLine[4].contains("2022-11") && nl.contains("Delta")) Delta202211+=1;
+            if(nextLine[4].contains("2022-12") && nl.contains("Delta")) Delta202212+=1;
+
+            if(nextLine[4].contains("2021-01") && nl.contains("Omicron")) Omi202101+=1;
+            if(nextLine[4].contains("2021-02") && nl.contains("Omicron")) Omi202102+=1;
+            if(nextLine[4].contains("2021-03") && nl.contains("Omicron")) Omi202103+=1;
+            if(nextLine[4].contains("2021-04") && nl.contains("Omicron")) Omi202104+=1;
+            if(nextLine[4].contains("2021-05") && nl.contains("Omicron")) Omi202105+=1;
+            if(nextLine[4].contains("2021-06") && nl.contains("Omicron")) Omi202106+=1;
+            if(nextLine[4].contains("2021-07") && nl.contains("Omicron")) Omi202107+=1;
+            if(nextLine[4].contains("2021-08") && nl.contains("Omicron")) Omi202108+=1;
+            if(nextLine[4].contains("2021-09") && nl.contains("Omicron")) Omi202109+=1;
+            if(nextLine[4].contains("2021-10") && nl.contains("Omicron")) Omi202110+=1;
+            if(nextLine[4].contains("2021-11") && nl.contains("Omicron")) Omi202111+=1;
+            if(nextLine[4].contains("2021-12") && nl.contains("Omicron")) Omi202112+=1;
+            if(nextLine[4].contains("2022-01") && nl.contains("Omicron")) Omi202201+=1;
+            if(nextLine[4].contains("2022-02") && nl.contains("Omicron")) Omi202202+=1;
+            if(nextLine[4].contains("2022-03") && nl.contains("Omicron")) Omi202203+=1;
+            if(nextLine[4].contains("2022-04") && nl.contains("Omicron")) Omi202204+=1;
+            if(nextLine[4].contains("2022-05") && nl.contains("Omicron")) Omi202205+=1;
+            if(nextLine[4].contains("2022-06") && nl.contains("Omicron")) Omi202206+=1;
+            if(nextLine[4].contains("2022-07") && nl.contains("Omicron")) Omi202207+=1;
+            if(nextLine[4].contains("2022-08") && nl.contains("Omicron")) Omi202208+=1;
+            if(nextLine[4].contains("2022-09") && nl.contains("Omicron")) Omi202209+=1;
+            if(nextLine[4].contains("2022-10") && nl.contains("Omicron")) Omi202210+=1;
+            if(nextLine[4].contains("2022-11") && nl.contains("Omicron")) Omi202211+=1;
+            if(nextLine[4].contains("2022-12") && nl.contains("Omicron")) Omi202212+=1;
+
+            Unk202101=temp1-Alp202101-Delta202101-Omi202101;
+            Unk202102=temp2-Alp202102-Delta202102-Omi202102;
+            Unk202103=temp3-Alp202103-Delta202103-Omi202103;
+            Unk202104=temp4-Alp202104-Delta202104-Omi202104;
+            Unk202105=temp5-Alp202105-Delta202105-Omi202105;
+            Unk202106=temp6-Alp202106-Delta202106-Omi202106;
+            Unk202107=temp7-Alp202107-Delta202107-Omi202107;
+            Unk202108=temp8-Alp202108-Delta202108-Omi202108;
+            Unk202109=temp9-Alp202109-Delta202109-Omi202109;
+            Unk202110=temp10-Alp202110-Delta202110-Omi202110;
+            Unk202111=temp11-Alp202111-Delta202111-Omi202111;
+            Unk202112=temp12-Alp202112-Delta202112-Omi202112;
+            Unk202201=temp13-Alp202201-Delta202201-Omi202201;
+            Unk202202=temp14-Alp202202-Delta202202-Omi202202;
+            Unk202203=temp15-Alp202203-Delta202203-Omi202203;
+            Unk202204=temp16-Alp202204-Delta202204-Omi202204;
+            Unk202205=temp17-Alp202205-Delta202205-Omi202205;
+            Unk202206=temp18-Alp202206-Delta202206-Omi202206;
+            Unk202207=temp19-Alp202207-Delta202207-Omi202207;
+            Unk202208=temp20-Alp202208-Delta202208-Omi202208;
+            Unk202209=temp21-Alp202209-Delta202209-Omi202209;
+            Unk202210=temp22-Alp202210-Delta202210-Omi202210;
+            Unk202211=temp23-Alp202211-Delta202211-Omi202211;
+            Unk202212=temp24-Alp202212-Delta202212-Omi202212;
             dataSize+=1;
             if(nl.contains("Alpha")) alpData+=1;
             if(nl.contains("Omicron")) omiData+=1;
@@ -172,6 +323,79 @@ public class PwllStem {
         BitmapEncoder.saveBitmapWithDPI(barChartScoVar, "./Pictures/SCOVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
         BitmapEncoder.saveBitmapWithDPI(barChartNIreVar, "./Pictures/NIREVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
     }
+    public static void VariantTimeCharts() throws IOException{
+        CategoryChart barChart2021quart1 = new CategoryChartBuilder().width(800).height(400).title("2021 - Quarter 1").build();
+        barChart2021quart1.getStyler().setLegendVisible(true);
+        barChart2021quart1.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
+        barChart2021quart1.addSeries("Alpha", Arrays.asList("2021-01", "2021-02", "2021-03"), Arrays.asList(Alp202101, Alp202102, Alp202103));
+        barChart2021quart1.addSeries("Delta", Arrays.asList("2021-01", "2021-02", "2021-03"), Arrays.asList(Delta202101, Delta202102, Delta202103));
+        barChart2021quart1.addSeries("Omicron", Arrays.asList("2021-01", "2021-02", "2021-03"), Arrays.asList(Omi202101, Omi202102, Omi202103));
+        barChart2021quart1.addSeries("Unknown", Arrays.asList("2021-01", "2021-02", "2021-03"), Arrays.asList(Unk202101, Unk202102, Unk202103));
+        BitmapEncoder.saveBitmapWithDPI(barChart2021quart1, "./Pictures/2021-quart1-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+
+        CategoryChart barChart2021quart2 = new CategoryChartBuilder().width(800).height(400).title("2021 - Quarter 2").build();
+        barChart2021quart2.getStyler().setLegendVisible(true);
+        barChart2021quart2.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
+        barChart2021quart2.addSeries("Alpha", Arrays.asList("2021-04", "2021-05", "2021-06"), Arrays.asList(Alp202104, Alp202105, Alp202106));
+        barChart2021quart2.addSeries("Delta", Arrays.asList("2021-04", "2021-05", "2021-06"), Arrays.asList(Delta202104, Delta202105, Delta202106));
+        barChart2021quart2.addSeries("Omicron", Arrays.asList("2021-04", "2021-05", "2021-06"), Arrays.asList(Omi202104, Omi202105, Omi202106));
+        barChart2021quart2.addSeries("Unknown", Arrays.asList("2021-04", "2021-05", "2021-06"), Arrays.asList(Unk202104, Unk202105, Unk202106));
+        BitmapEncoder.saveBitmapWithDPI(barChart2021quart2, "./Pictures/2021-quart2-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+
+        CategoryChart barChart2021quart3 = new CategoryChartBuilder().width(800).height(400).title("2021 - Quarter 3").build();
+        barChart2021quart3.getStyler().setLegendVisible(true);
+        barChart2021quart3.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
+        barChart2021quart3.addSeries("Alpha", Arrays.asList("2021-07", "2021-08", "2021-09"), Arrays.asList(Alp202107, Alp202108, Alp202109));
+        barChart2021quart3.addSeries("Delta", Arrays.asList("2021-07", "2021-08", "2021-09"), Arrays.asList(Delta202107, Delta202108, Delta202109));
+        barChart2021quart3.addSeries("Omicron", Arrays.asList("2021-07", "2021-08", "2021-09"), Arrays.asList(Omi202107, Omi202108, Omi202109));
+        barChart2021quart3.addSeries("Unknown", Arrays.asList("2021-07", "2021-08", "2021-09"), Arrays.asList(Unk202107, Unk202108, Unk202109));
+        BitmapEncoder.saveBitmapWithDPI(barChart2021quart3, "./Pictures/2021-quart3-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+
+        CategoryChart barChart2021quart4 = new CategoryChartBuilder().width(800).height(400).title("2021 - Quarter 4").build();
+        barChart2021quart4.getStyler().setLegendVisible(true);
+        barChart2021quart4.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
+        barChart2021quart4.addSeries("Alpha", Arrays.asList("2021-10", "2021-11", "2021-12"), Arrays.asList(Alp202110, Alp202111, Alp202112));
+        barChart2021quart4.addSeries("Delta", Arrays.asList("2021-10", "2021-11", "2021-12"), Arrays.asList(Delta202110, Delta202111, Delta202112));
+        barChart2021quart4.addSeries("Omicron", Arrays.asList("2021-10", "2021-11", "2021-12"), Arrays.asList(Omi202110, Omi202111, Omi202112));
+        barChart2021quart4.addSeries("Unknown", Arrays.asList("2021-10", "2021-11", "2021-12"), Arrays.asList(Unk202110, Unk202111, Unk202112));
+        BitmapEncoder.saveBitmapWithDPI(barChart2021quart4, "./Pictures/2021-quart4-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+
+        CategoryChart barChart2022quart1 = new CategoryChartBuilder().width(800).height(400).title("2022 - Quarter 1").build();
+        barChart2022quart1.getStyler().setLegendVisible(true);
+        barChart2022quart1.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
+        barChart2022quart1.addSeries("Alpha", Arrays.asList("2022-01", "2022-02", "2022-03"), Arrays.asList(Alp202201, Alp202202, Alp202203));
+        barChart2022quart1.addSeries("Delta", Arrays.asList("2022-01", "2022-02", "2022-03"), Arrays.asList(Delta202201, Delta202202, Delta202203));
+        barChart2022quart1.addSeries("Omicron", Arrays.asList("2022-01", "2022-02", "2022-03"), Arrays.asList(Omi202201, Omi202202, Omi202203));
+        barChart2022quart1.addSeries("Unknown", Arrays.asList("2022-01", "2022-02", "2022-03"), Arrays.asList(Unk202201, Unk202202, Unk202203));
+        BitmapEncoder.saveBitmapWithDPI(barChart2022quart1, "./Pictures/2022-quart1-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+
+        CategoryChart barChart2022quart2 = new CategoryChartBuilder().width(800).height(400).title("2022 - Quarter 2").build();
+        barChart2022quart2.getStyler().setLegendVisible(true);
+        barChart2022quart2.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
+        barChart2022quart2.addSeries("Alpha", Arrays.asList("2022-04", "2022-05", "2022-06"), Arrays.asList(Alp202204, Alp202205, Alp202206));
+        barChart2022quart2.addSeries("Delta", Arrays.asList("2022-04", "2022-05", "2022-06"), Arrays.asList(Delta202204, Delta202205, Delta202206));
+        barChart2022quart2.addSeries("Omicron", Arrays.asList("2022-04", "2022-05", "2022-06"), Arrays.asList(Omi202204, Omi202205, Omi202206));
+        barChart2022quart2.addSeries("Unknown", Arrays.asList("2022-04", "2022-05", "2022-06"), Arrays.asList(Unk202204, Unk202205, Unk202206));
+        BitmapEncoder.saveBitmapWithDPI(barChart2022quart2, "./Pictures/2022-quart2-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+
+        CategoryChart barChart2022quart3 = new CategoryChartBuilder().width(800).height(400).title("2022 - Quarter 3").build();
+        barChart2022quart3.getStyler().setLegendVisible(true);
+        barChart2022quart3.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
+        barChart2022quart3.addSeries("Alpha", Arrays.asList("2022-07", "2022-08", "2022-09"), Arrays.asList(Alp202207, Alp202208, Alp202209));
+        barChart2022quart3.addSeries("Delta", Arrays.asList("2022-07", "2022-08", "2022-09"), Arrays.asList(Delta202207, Delta202208, Delta202209));
+        barChart2022quart3.addSeries("Omicron", Arrays.asList("2022-07", "2022-08", "2022-09"), Arrays.asList(Omi202207, Omi202208, Omi202209));
+        barChart2022quart3.addSeries("Unknown", Arrays.asList("2022-07", "2022-08", "2022-09"), Arrays.asList(Unk202207, Unk202208, Unk202209));
+        BitmapEncoder.saveBitmapWithDPI(barChart2022quart3, "./Pictures/2022-quart3-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+
+        CategoryChart barChart2022quart4 = new CategoryChartBuilder().width(800).height(400).title("2022 - Quarter 4").build();
+        barChart2022quart4.getStyler().setLegendVisible(true);
+        barChart2022quart4.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
+        barChart2022quart4.addSeries("Alpha", Arrays.asList("2022-10", "2022-11", "2022-12"), Arrays.asList(Alp202210, Alp202211, Alp202212));
+        barChart2022quart4.addSeries("Delta", Arrays.asList("2022-10", "2022-11", "2022-12"), Arrays.asList(Delta202210, Delta202211, Delta202212));
+        barChart2022quart4.addSeries("Omicron", Arrays.asList("2022-10", "2022-11", "2022-12"), Arrays.asList(Omi202210, Omi202211, Omi202212));
+        barChart2022quart4.addSeries("Unknown", Arrays.asList("2022-10", "2022-11", "2022-12"), Arrays.asList(Unk202210, Unk202211, Unk202212));
+        BitmapEncoder.saveBitmapWithDPI(barChart2022quart4, "./Pictures/2022-quart4-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
+    }
     public static void mainUiInit() {
         // Main UI Initialization
         frameMain = new JFrame("Main Frame");
@@ -192,6 +416,7 @@ public class PwllStem {
         btnScotland = new JButton("Scotland");
         // Northern Ireland Button
         btnNIre = new JButton("Northern Ireland");
+        btnVarTime = new JButton("Variants over Time");
         // UI Layout
         c = new GridBagConstraints();
         c.gridx = 0;
@@ -222,6 +447,8 @@ public class PwllStem {
         panelMain.add(btnWales, c);
         c.gridy = 5;
         panelMain.add(btnNIre, c);
+        c.gridy = 6;
+        panelMain.add(btnVarTime, c);
         c.gridx = 0;
 //        c.weighty = 5.0;
         c.gridy = 6;
@@ -483,7 +710,7 @@ public class PwllStem {
         c.weighty = 1.0;
         c.anchor = GridBagConstraints.NORTHWEST;
         c.insets = new Insets(10,10,0,0);
-        panelScotland.add(BarORPie, c);
+        panelNire.add(BarORPie, c);
         c.gridx = 2;
         c.anchor = GridBagConstraints.NORTHEAST;
         c.insets = new Insets(10,0,0,10);
@@ -501,22 +728,97 @@ public class PwllStem {
         frameNIre.add(panelNire);
         frameNIre.setSize(new Dimension(1280,720));
     }
+    public static void varTimeInit(){
+        // UK Sub UI Initialization
+        icon = new ImageIcon[] {new ImageIcon("./Pictures/2021-quart1-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2021-quart2-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2021-quart3-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2021-quart4-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2022-quart1-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2022-quart2-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2022-quart3-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2022-quart4-VariantTimeBarChart.png")};
+        i = 0;
+        frameVarTime = new JFrame("Variants over Time 'Frame'");
+        JPanel panelVarTime = new JPanel(new GridBagLayout());
+        JLabel lblVarTime = new JLabel("Variants over Time");
+        lblVarTime.setFont(new Font("Arial", Font.PLAIN, 48));
+        btnNext = new JButton(">");
+        btnPrev = new JButton("<");
+        lblVarTimeChart = new JLabel();
+        lblVarTimeChart.setIcon(new ImageIcon("./Pictures/2021-quart1-VariantTimeBarChart.png"));
+        c = new GridBagConstraints();
+        c.gridy = 0;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.gridx = 1;
+        c.anchor = GridBagConstraints.NORTH;
+        c.insets = new Insets(10,0,0,0);
+        panelVarTime.add(lblVarTime,c);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.WEST;
+        c.insets = new Insets(0,10, 0, 0);
+        c.weightx = GridBagConstraints.REMAINDER;
+        panelVarTime.add(btnPrev, c);
+        c.gridx = 2;
+        c.weightx = 1;
+        c.gridwidth=GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.CENTER;
+        panelVarTime.add(lblVarTimeChart,c);
+        c.gridx = 4;
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.EAST;
+        c.fill = GridBagConstraints.NONE;
+        c.insets = new Insets(0,0, 0, 10);
+        c.weightx = GridBagConstraints.REMAINDER;
+        panelVarTime.add(btnNext, c);
+        frameVarTime.add(panelVarTime);
+        frameVarTime.setSize(new Dimension(1400,720));
+
+    }
+    public static void VarTimeChartChanger(){
+        if(i==7)btnNext.setEnabled(false);
+        if(i!=7)btnNext.setEnabled(true);
+        if(i==0)btnPrev.setEnabled(false);
+        if(i!=0)btnPrev.setEnabled(true);
+        switch(i){
+            default: System.out.println(i);
+            case 0: lblVarTimeChart.setIcon(icon[i]);
+            case 1: lblVarTimeChart.setIcon(icon[i]);
+            case 2: lblVarTimeChart.setIcon(icon[i]);
+            case 3: lblVarTimeChart.setIcon(icon[i]);
+            case 4: lblVarTimeChart.setIcon(icon[i]);
+            case 5: lblVarTimeChart.setIcon(icon[i]);
+            case 6: lblVarTimeChart.setIcon(icon[i]);
+            case 7: lblVarTimeChart.setIcon(icon[i]);
+        }
+    }
     public static void main(String[] args) throws IOException,CsvValidationException {
         //Variable Assignment
         varInit();
         PieChartsInit();
         barChartsInit();
+        VariantTimeCharts();
         mainUiInit();
         UKUiInit();
         ENGUiInit();
         WALUiInit();
         SCOUiInit();
         NIREUiInit();
-
+        varTimeInit();
         btnUK.addActionListener(e -> frameUK.setVisible(true));
         btnEngland.addActionListener(e -> frameEngland.setVisible(true));
         btnWales.addActionListener(e -> frameWales.setVisible(true));
         btnScotland.addActionListener(e -> frameScotland.setVisible(true));
         btnNIre.addActionListener(e -> frameNIre.setVisible(true));
+        btnVarTime.addActionListener(e -> frameVarTime.setVisible(true));
+        VarTimeChartChanger();
+        if(i<=7) {
+            btnNext.addActionListener(e->{
+                i++;
+                VarTimeChartChanger();
+            });
+        }
+        if(i>=0) {
+            btnPrev.addActionListener(e->{
+                i=i-1;
+                VarTimeChartChanger();
+            });
+        }
     }
 }
