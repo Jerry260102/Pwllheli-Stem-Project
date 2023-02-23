@@ -26,7 +26,7 @@ public class preInit {
             Omi202201, Omi202202, Omi202203, Omi202204, Omi202205, Omi202206, Omi202207, Omi202208, Omi202209, Omi202210, Omi202211, Omi202212,
             Unk202101, Unk202102, Unk202103, Unk202104, Unk202105, Unk202106, Unk202107, Unk202108, Unk202109, Unk202110, Unk202111, Unk202112,
             Unk202201, Unk202202, Unk202203, Unk202204, Unk202205, Unk202206, Unk202207, Unk202208, Unk202209, Unk202210, Unk202211, Unk202212;
-
+    public static String MorW;
     // UI Variables Declaration
     public static JFrame frameMain, frameUK, frameWales, frameEngland, frameScotland, frameNIre, frameVarTime;
     public static JPanel panelMain, panelUK, panelWales, panelEngland, panelScotland, panelNire;
@@ -36,6 +36,7 @@ public class preInit {
             lblVarTimeChart;
     public static JButton btnUK , btnWales, btnEngland, btnScotland, btnNIre, btnVarTime, btnNext, btnPrev;
     public static ImageIcon[] icon;
+
     public static GridBagConstraints c;
     // Count Rows with Values Function
 //    public static int cRwV(String[] values) throws IOException, CsvValidationException {

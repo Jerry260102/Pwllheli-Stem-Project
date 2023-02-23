@@ -5,13 +5,10 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.knowm.xchart.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.*;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.zip.GZIPInputStream;
 
 import static pwllstem.preInit.*;
@@ -242,8 +239,8 @@ public class PwllStem {
         alpPer = Math.round(((float) alpData * 100f) / (float) dataSize);
     }
     public static void PieChartsInit() throws IOException{
-        PieChart pieChartCountries = new PieChartBuilder().width(400).height(300)
-                .title("Results by Country").build();
+        PieChart pieChartCountries = new PieChartBuilder().width(425).height(400)
+                .title("UK by Country").build();
         pieChartCountries.addSeries("England", engPer);
         pieChartCountries.addSeries("Wales", walPer);
         pieChartCountries.addSeries("Scotland", scoPer);
@@ -254,32 +251,32 @@ public class PwllStem {
                 Color.blue,
                 Color.orange
         });
-        PieChart pieChartVariants = new PieChartBuilder().width(400).height(300)
-                .title("Results by Variant").build();
+        PieChart pieChartVariants = new PieChartBuilder().width(425).height(400)
+                .title("UK by Variant").build();
         pieChartVariants.addSeries("Unknown", unknownPer);
         pieChartVariants.addSeries("Alpha", alpPer);
         pieChartVariants.addSeries("Delta", deltaPer);
         pieChartVariants.addSeries("Omicron", omiPer);
-        PieChart pieChartEngVar = new PieChartBuilder().width(400).height(300)
+        PieChart pieChartEngVar = new PieChartBuilder().width(425).height(400)
                 .title("England by Variant").build();
         pieChartEngVar.addSeries("Unknown", engUnknownPer);
         pieChartEngVar.addSeries("Alpha", engAlpPer);
         pieChartEngVar.addSeries("Delta", engDeltaPer);
         pieChartEngVar.addSeries("Omicron", engOmiPer);
-        PieChart pieChartWalVar = new PieChartBuilder().width(400).height(300)
+        PieChart pieChartWalVar = new PieChartBuilder().width(425).height(400)
                 .title("Wales by Variant").build();
         pieChartWalVar.addSeries("Unknown", walUnknownPer);
         pieChartWalVar.addSeries("Alpha", walAlpPer);
         pieChartWalVar.addSeries("Delta", walDeltaPer);
         pieChartWalVar.addSeries("Omicron", walOmiPer);
-        PieChart pieChartScoVar = new PieChartBuilder().width(400).height(300)
+        PieChart pieChartScoVar = new PieChartBuilder().width(425).height(400)
                 .title("Scotland by Variant").build();
         pieChartScoVar.addSeries("Unknown", scoUnknownPer);
         pieChartScoVar.addSeries("Alpha", scoAlpPer);
         pieChartScoVar.addSeries("Delta", scoDeltaPer);
         pieChartScoVar.addSeries("Omicron", scoOmiPer);
-        PieChart pieChartNIreVar = new PieChartBuilder().width(400).height(300)
-                .title("Northern Ireland by Variant").build();
+        PieChart pieChartNIreVar = new PieChartBuilder().width(425).height(400)
+                .title("N.Ireland by Variant").build();
         pieChartNIreVar.addSeries("Unknown", nIreUnknownPer);
         pieChartNIreVar.addSeries("Alpha", nIreAlpPer);
         pieChartNIreVar.addSeries("Delta", nIreDeltaPer);
@@ -292,27 +289,27 @@ public class PwllStem {
         BitmapEncoder.saveBitmapWithDPI(pieChartNIreVar, "./Pictures/NIREVariantPieChart", BitmapEncoder.BitmapFormat.PNG, 100);
     }
     public static void barChartsInit() throws IOException {
-        CategoryChart barChartVariants = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        CategoryChart barChartVariants = new CategoryChartBuilder().width(425).height(400).title("UK by Variant").build();
         barChartVariants.getStyler().setLegendVisible(false);
         barChartVariants.getStyler().setSeriesColors(new Color[] {Color.BLUE});
         barChartVariants.addSeries("Test", Arrays.asList("Alpha", "Delta", "Omicron", "Unknown"), Arrays.asList(alpPer, deltaPer, omiPer, unknownPer));
-        CategoryChart barChartCountries = new CategoryChartBuilder().width(400).height(300).title("Results by Country").build();
+        CategoryChart barChartCountries = new CategoryChartBuilder().width(425).height(400).title("UK by Country").build();
         barChartCountries.getStyler().setLegendVisible(false);
         barChartCountries.getStyler().setSeriesColors(new Color[] {Color.BLUE});
         barChartCountries.addSeries("Test", Arrays.asList("Wales", "England", "Scotland", "N. Ireland"), Arrays.asList(walPer, engPer, scoPer, nIrePer));
-        CategoryChart barChartEngVar = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        CategoryChart barChartEngVar = new CategoryChartBuilder().width(425).height(400).title("England by Variant").build();
         barChartEngVar.getStyler().setLegendVisible(false);
         barChartEngVar.getStyler().setSeriesColors(new Color[] {Color.BLUE});
         barChartEngVar.addSeries("Test", Arrays.asList("Alpha", "Delta", "Omicron", "Unknown"), Arrays.asList(engAlpPer, engDeltaPer, engOmiPer, engUnknownPer));
-        CategoryChart barChartWalVar = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        CategoryChart barChartWalVar = new CategoryChartBuilder().width(425).height(400).title("Wales by Variant").build();
         barChartWalVar.getStyler().setLegendVisible(false);
         barChartWalVar.getStyler().setSeriesColors(new Color[] {Color.BLUE});
         barChartWalVar.addSeries("Test", Arrays.asList("Alpha", "Delta", "Omicron", "Unknown"), Arrays.asList(walAlpPer, walDeltaPer, walOmiPer, walUnknownPer));
-        CategoryChart barChartScoVar = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        CategoryChart barChartScoVar = new CategoryChartBuilder().width(425).height(400).title("Scotland by Variant").build();
         barChartScoVar.getStyler().setLegendVisible(false);
         barChartScoVar.getStyler().setSeriesColors(new Color[] {Color.BLUE});
         barChartScoVar.addSeries("Test", Arrays.asList("Alpha", "Delta", "Omicron", "Unknown"), Arrays.asList(scoAlpPer, scoDeltaPer, scoOmiPer, scoUnknownPer));
-        CategoryChart barChartNIreVar = new CategoryChartBuilder().width(400).height(300).title("Results by Variant").build();
+        CategoryChart barChartNIreVar = new CategoryChartBuilder().width(425).height(400).title("N.Ireland by Variant").build();
         barChartNIreVar.getStyler().setLegendVisible(false);
         barChartNIreVar.getStyler().setSeriesColors(new Color[] {Color.BLUE});
         barChartNIreVar.addSeries("Test", Arrays.asList("Alpha", "Delta", "Omicron", "Unknown"), Arrays.asList(nIreAlpPer, nIreDeltaPer, nIreOmiPer, nIreUnknownPer));
@@ -324,7 +321,7 @@ public class PwllStem {
         BitmapEncoder.saveBitmapWithDPI(barChartNIreVar, "./Pictures/NIREVariantBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
     }
     public static void VariantTimeCharts() throws IOException{
-        CategoryChart barChart2021quart1 = new CategoryChartBuilder().width(800).height(400).title("2021 - Quarter 1").build();
+        CategoryChart barChart2021quart1 = new CategoryChartBuilder().width(850).height(400).title("2021 - Quarter 1").build();
         barChart2021quart1.getStyler().setLegendVisible(true);
         barChart2021quart1.getStyler().setSeriesColors(new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.PINK});
         barChart2021quart1.addSeries("Alpha", Arrays.asList("2021-01", "2021-02", "2021-03"), Arrays.asList(Alp202101, Alp202102, Alp202103));
@@ -405,18 +402,24 @@ public class PwllStem {
         JButton btnLlandrillo = new JButton(new ImageIcon("./Pictures/llandrillo.png"));
         JLabel lblEESW = new JLabel(new ImageIcon("./Pictures/eesw.png"));
         lblMain = new JLabel("Covid Cases");
-        lblMain.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblMain.setFont(new Font("Courier New", Font.BOLD, 48));
         // UK Button
         btnUK = new JButton("UK");
+        btnUK.setFont(new Font("Courier New",Font.PLAIN, 14));
         // Wales Button
         btnWales = new JButton("Wales");
+        btnWales.setFont(new Font("Courier New",Font.PLAIN, 14));
         // England Button
         btnEngland = new JButton( "England");
+        btnEngland.setFont(new Font("Courier New",Font.PLAIN, 14));
         // Scotland Button
         btnScotland = new JButton("Scotland");
+        btnScotland.setFont(new Font("Courier New",Font.PLAIN, 14));
         // Northern Ireland Button
         btnNIre = new JButton("Northern Ireland");
+        btnNIre.setFont(new Font("Courier New",Font.PLAIN, 14));
         btnVarTime = new JButton("Variants over Time");
+        btnVarTime.setFont(new Font("Courier New",Font.PLAIN, 14));
         // UI Layout
         c = new GridBagConstraints();
         c.gridx = 0;
@@ -461,25 +464,22 @@ public class PwllStem {
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setVisible(true);
 
-        btnAber.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frameMain, "Prifysgol Aberystwyth University is our company sponsor for this project and has been a massive help in our understanding of how genome sequencing and handling big data works.",
-                    "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-        });
-        btnLlandrillo.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frameMain, "We are a group of students from Coleg Meirion-Dwyfor, who have been working on making this application to allow for easy-to-understand representation of data regarding the COVID genome.\nThis application will allow for anyone to read and gain a deeper understanding of how COVID works at any level",
-                    "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-        });
+        btnAber.addActionListener(e -> JOptionPane.showMessageDialog(frameMain, "Prifysgol Aberystwyth University is our company sponsor for this project and has been a massive help in our understanding of how genome sequencing and handling big data works.",
+                "INFORMATION", JOptionPane.INFORMATION_MESSAGE));
+        btnLlandrillo.addActionListener(e -> JOptionPane.showMessageDialog(frameMain, "We are a group of students from Coleg Meirion-Dwyfor, who have been working on making this application to allow for easy-to-understand representation of data regarding the COVID genome.\nThis application will allow for anyone to read and gain a deeper understanding of how COVID works at any level",
+                "INFORMATION", JOptionPane.INFORMATION_MESSAGE));
     }
     public static void UKUiInit(){
         // UK Sub UI Initialization
         frameUK = new JFrame("UK Frame");
         panelUK = new JPanel(new GridBagLayout());
         lblUKPanel = new JLabel("Cases in UK");
-        lblUKPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblUKPanel.setFont(new Font("Courier New", Font.BOLD, 48));
         lblUKTotalCases = new JLabel("Total Cases: "+dataSize);
-        lblUKTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblUKTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
         lblUKTotalCases.setForeground(Color.RED);
         JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -537,11 +537,12 @@ public class PwllStem {
         frameEngland = new JFrame("England Frame");
         panelEngland = new JPanel(new GridBagLayout());
         lblEnglandPanel = new JLabel("Cases in England");
-        lblEnglandPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblEnglandPanel.setFont(new Font("Courier New", Font.BOLD, 48));
         lblEngTotalCases = new JLabel("Total Cases: "+engData);
-        lblEngTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblEngTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
         lblEngTotalCases.setForeground(Color.RED);
         JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -586,11 +587,12 @@ public class PwllStem {
         frameWales = new JFrame("Wales Frame");
         panelWales = new JPanel(new GridBagLayout());
         lblWalesPanel = new JLabel("Cases in Wales");
-        lblWalesPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblWalesPanel.setFont(new Font("Courier New", Font.BOLD, 48));
         lblWalTotalCases = new JLabel("Total Cases: "+walData);
-        lblWalTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblWalTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
         lblWalTotalCases.setForeground(Color.RED);
         JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -635,11 +637,12 @@ public class PwllStem {
         frameScotland = new JFrame("Scotland Frame");
         panelScotland = new JPanel(new GridBagLayout());
         lblScotlandPanel = new JLabel("Cases in Scotland");
-        lblScotlandPanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblScotlandPanel.setFont(new Font("Courier New", Font.BOLD, 48));
         lblScoTotalCases = new JLabel("Total Cases: "+scoData);
-        lblScoTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblScoTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
         lblScoTotalCases.setForeground(Color.RED);
         JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -684,11 +687,12 @@ public class PwllStem {
         frameNIre = new JFrame("Northern Ireland Frame");
         panelNire = new JPanel(new GridBagLayout());
         lblNIrePanel = new JLabel("Cases in Northern Ireland");
-        lblNIrePanel.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblNIrePanel.setFont(new Font("Courier New", Font.BOLD, 48));
         lblNIreTotalCases = new JLabel("Total Cases: "+nIreData);
-        lblNIreTotalCases.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblNIreTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
         lblNIreTotalCases.setForeground(Color.RED);
         JToggleButton BarORPie = new JToggleButton("Bar");
+        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -730,14 +734,34 @@ public class PwllStem {
     }
     public static void varTimeInit(){
         // UK Sub UI Initialization
-        icon = new ImageIcon[] {new ImageIcon("./Pictures/2021-quart1-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2021-quart2-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2021-quart3-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2021-quart4-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2022-quart1-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2022-quart2-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2022-quart3-VariantTimeBarChart.png"),new ImageIcon("./Pictures/2022-quart4-VariantTimeBarChart.png")};
+        icon = new ImageIcon[] {
+                new ImageIcon("./Pictures/2021-quart1-VariantTimeBarChart.png"),
+                new ImageIcon("./Pictures/2021-quart2-VariantTimeBarChart.png"),
+                new ImageIcon("./Pictures/2021-quart3-VariantTimeBarChart.png"),
+                new ImageIcon("./Pictures/2021-quart4-VariantTimeBarChart.png"),
+                new ImageIcon("./Pictures/2022-quart1-VariantTimeBarChart.png"),
+                new ImageIcon("./Pictures/2022-quart2-VariantTimeBarChart.png"),
+                new ImageIcon("./Pictures/2022-quart3-VariantTimeBarChart.png"),
+                new ImageIcon("./Pictures/2022-quart4-VariantTimeBarChart.png")
+        };
         i = 0;
         frameVarTime = new JFrame("Variants over Time 'Frame'");
         JPanel panelVarTime = new JPanel(new GridBagLayout());
         JLabel lblVarTime = new JLabel("Variants over Time");
-        lblVarTime.setFont(new Font("Arial", Font.PLAIN, 48));
+        lblVarTime.setFont(new Font("Courier New", Font.BOLD, 48));
+//        JToggleButton MonthlyorWeekly = new JToggleButton("Weekly");
+//        MonthlyorWeekly.setFont(new Font("Courier New",Font.PLAIN, 14));
+//        MonthlyorWeekly.addChangeListener(event -> {
+//            if (MonthlyorWeekly.isSelected()){
+//                MonthlyorWeekly.setText("Monthly");
+//            } else {
+//                MonthlyorWeekly.setText("Weekly");
+//            }
+//        });
         btnNext = new JButton(">");
+        btnNext.setFont(new Font("Courier New",Font.BOLD, 14));
         btnPrev = new JButton("<");
+        btnPrev.setFont(new Font("Courier New",Font.BOLD, 14));
         lblVarTimeChart = new JLabel();
         lblVarTimeChart.setIcon(new ImageIcon("./Pictures/2021-quart1-VariantTimeBarChart.png"));
         c = new GridBagConstraints();
@@ -749,6 +773,10 @@ public class PwllStem {
         c.anchor = GridBagConstraints.NORTH;
         c.insets = new Insets(10,0,0,0);
         panelVarTime.add(lblVarTime,c);
+//        c.gridx = 3;
+//        c.anchor = GridBagConstraints.NORTHEAST;
+//        c.insets = new Insets(10,0,0,10);
+//        panelVarTime.add(MonthlyorWeekly,c);
         c.gridx = 0;
         c.gridy = 1;
         c.anchor = GridBagConstraints.WEST;
@@ -757,6 +785,7 @@ public class PwllStem {
         panelVarTime.add(btnPrev, c);
         c.gridx = 2;
         c.weightx = 1;
+        c.insets = new Insets(0,0,0,0);
         c.gridwidth=GridBagConstraints.REMAINDER;
         c.anchor = GridBagConstraints.CENTER;
         panelVarTime.add(lblVarTimeChart,c);
