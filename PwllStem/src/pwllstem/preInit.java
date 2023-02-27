@@ -28,12 +28,8 @@ public class preInit {
             Unk202201, Unk202202, Unk202203, Unk202204, Unk202205, Unk202206, Unk202207, Unk202208, Unk202209, Unk202210, Unk202211, Unk202212;
     public static String MorW;
     // UI Variables Declaration
-    public static JFrame frameMain, frameUK, frameWales, frameEngland, frameScotland, frameNIre, frameVarTime;
-    public static JPanel panelMain, panelUK, panelWales, panelEngland, panelScotland, panelNire;
-    public static JLabel lblMain, lblUKPanel, lblUKTotalCases, lblCountryUKPieChart, lblVariantUKPieChart,
-            lblEnglandPanel, lblEngTotalCases, lblEnglandPieChart, lblWalesPanel, lblWalTotalCases, lblWalesPieChart,
-            lblScotlandPanel, lblScoTotalCases, lblScotlandPieChart, lblNIrePanel, lblNIreTotalCases, lblNIrePieChart,
-            lblVarTimeChart;
+    public static JFrame frameUK, frameWales, frameEngland, frameScotland, frameNIre, frameVarTime;
+    public static JLabel lblCountryUKPieChart, lblVariantUKPieChart, lblEnglandPieChart, lblWalesPieChart, lblScotlandPieChart, lblNIrePieChart, lblVarTimeChart;
     public static JButton btnUK , btnWales, btnEngland, btnScotland, btnNIre, btnVarTime, btnNext, btnPrev;
     public static ImageIcon[] icon;
 

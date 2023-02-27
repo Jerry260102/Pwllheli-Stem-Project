@@ -8,7 +8,9 @@ import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.*;
+import java.time.YearMonth;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.zip.GZIPInputStream;
 
 import static pwllstem.preInit.*;
@@ -17,6 +19,7 @@ public class PwllStem {
     private static int i = 0;
 
     public static void varInit() throws IOException, CsvValidationException {
+        System.out.println(YearMonth.of(2021,1).lengthOfMonth());
         System.out.println(Files.isRegularFile(Paths.get(filename)));
         if(!Files.isRegularFile(Paths.get(filename))){
             Path gzfilename = Paths.get("csv/cog_metadata.csv.gz");
@@ -43,11 +46,18 @@ public class PwllStem {
         Omi202201 = Omi202202 = Omi202203 = Omi202204 = Omi202205 = Omi202206 = Omi202207 = Omi202208 = Omi202209 = Omi202210 = Omi202211 = Omi202212 = 0;
         Unk202101 = Unk202102 = Unk202103 = Unk202104 = Unk202105 = Unk202106 = Unk202107 = Unk202108 = Unk202109 = Unk202110 = Unk202111 = Unk202112 = 0;
         Unk202201 = Unk202202 = Unk202203 = Unk202204 = Unk202205 = Unk202206 = Unk202207 = Unk202208 = Unk202209 = Unk202210 = Unk202211 = Unk202212 = 0;
+//        int[] temp = new int[1000];
+        //for(int p=0;p<temp.length;p++)temp[p]=0;
         int temp1 = 0, temp2 = 0, temp3 = 0, temp4 = 0, temp5 = 0, temp6 = 0, temp7 = 0, temp8 = 0, temp9 = 0, temp10 = 0, temp11 = 0, temp12 = 0,
                 temp13 = 0, temp14 = 0, temp15 = 0, temp16 = 0, temp17 = 0, temp18 = 0, temp19 = 0, temp20 = 0, temp21 = 0, temp22 = 0, temp23 = 0, temp24 = 0;
-
+//        String[] year = {"2021","2022"};
+//        String[] month = {"01","02","03","04","05","06","07","08","09","10","11","12"};
+//        String[] day = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
         while((nextLine = reader.readNext())!=null){
             String nl = Arrays.asList(nextLine).toString();
+//            for(int z=0;z<2;z++)for(int y=0;y<12;y++)for(int x=0;x<YearMonth.of(Integer.parseInt(year[z]), y+1).lengthOfMonth();x++){
+//                if(nextLine[4].contains(String.format("%s-%s-%s", year[z],month[y],day[x])))temp[x]+=1;
+//            }
             if(nextLine[4].contains("2021-01")) temp1+=1;
             if(nextLine[4].contains("2021-02")) temp2+=1;
             if(nextLine[4].contains("2021-03")) temp3+=1;
@@ -395,31 +405,33 @@ public class PwllStem {
     }
     public static void mainUiInit() {
         // Main UI Initialization
-        frameMain = new JFrame("Main Frame");
-        panelMain = new JPanel(new GridBagLayout());
+        JFrame frameMain = new JFrame("Main Frame");
+        JPanel panelMain = new JPanel(new GridBagLayout());
+        panelMain.setBackground(new Color(0,0,0));
         // Main Label
         JButton btnAber = new JButton(new ImageIcon("./Pictures/aber.png"));
         JButton btnLlandrillo = new JButton(new ImageIcon("./Pictures/llandrillo.png"));
         JLabel lblEESW = new JLabel(new ImageIcon("./Pictures/eesw.png"));
-        lblMain = new JLabel("Covid Cases");
+        JLabel lblMain = new JLabel("Covid Cases");
         lblMain.setFont(new Font("Courier New", Font.BOLD, 48));
+        lblMain.setForeground(new Color(255,255,255));
         // UK Button
         btnUK = new JButton("UK");
-        btnUK.setFont(new Font("Courier New",Font.PLAIN, 14));
+        btnUK.setFont(new Font("Courier New",Font.BOLD, 18));
         // Wales Button
         btnWales = new JButton("Wales");
-        btnWales.setFont(new Font("Courier New",Font.PLAIN, 14));
+        btnWales.setFont(new Font("Courier New",Font.BOLD, 18));
         // England Button
         btnEngland = new JButton( "England");
-        btnEngland.setFont(new Font("Courier New",Font.PLAIN, 14));
+        btnEngland.setFont(new Font("Courier New",Font.BOLD, 18));
         // Scotland Button
         btnScotland = new JButton("Scotland");
-        btnScotland.setFont(new Font("Courier New",Font.PLAIN, 14));
+        btnScotland.setFont(new Font("Courier New",Font.BOLD, 18));
         // Northern Ireland Button
         btnNIre = new JButton("Northern Ireland");
-        btnNIre.setFont(new Font("Courier New",Font.PLAIN, 14));
+        btnNIre.setFont(new Font("Courier New",Font.BOLD, 18));
         btnVarTime = new JButton("Variants over Time");
-        btnVarTime.setFont(new Font("Courier New",Font.PLAIN, 14));
+        btnVarTime.setFont(new Font("Courier New",Font.BOLD, 18));
         // UI Layout
         c = new GridBagConstraints();
         c.gridx = 0;
@@ -472,14 +484,16 @@ public class PwllStem {
     public static void UKUiInit(){
         // UK Sub UI Initialization
         frameUK = new JFrame("UK Frame");
-        panelUK = new JPanel(new GridBagLayout());
-        lblUKPanel = new JLabel("Cases in UK");
+        JPanel panelUK = new JPanel(new GridBagLayout());
+        panelUK.setBackground(new Color(0,0,0));
+        JLabel lblUKPanel = new JLabel("Cases in UK");
         lblUKPanel.setFont(new Font("Courier New", Font.BOLD, 48));
-        lblUKTotalCases = new JLabel("Total Cases: "+dataSize);
-        lblUKTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
-        lblUKTotalCases.setForeground(Color.RED);
+        lblUKPanel.setForeground(new Color(255,255,255));
+        JLabel lblUKTotalCases = new JLabel("Total Cases: "+dataSize);
+        lblUKTotalCases.setFont(new Font("Courier New", Font.BOLD, 26));
+        lblUKTotalCases.setForeground(new Color(255,204,203));
         JToggleButton BarORPie = new JToggleButton("Bar");
-        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
+        BarORPie.setFont(new Font("Courier New",Font.BOLD, 18));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -493,12 +507,11 @@ public class PwllStem {
 
             }
         });
-        lblCountryUKPieChart = new JLabel();
+        JLabel lblCountryUKPieChart = new JLabel();
         lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryPieChart.png"));
-        lblVariantUKPieChart = new JLabel();
+        JLabel lblVariantUKPieChart = new JLabel();
         lblVariantUKPieChart.setIcon(new ImageIcon("./Pictures/UKVariantPieChart.png"));
         c = new GridBagConstraints();
-
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 1;
@@ -535,14 +548,16 @@ public class PwllStem {
     public static void ENGUiInit(){
         // UK Sub UI Initialization
         frameEngland = new JFrame("England Frame");
-        panelEngland = new JPanel(new GridBagLayout());
-        lblEnglandPanel = new JLabel("Cases in England");
+        JPanel panelEngland = new JPanel(new GridBagLayout());
+        panelEngland.setBackground(new Color(0,0,0));
+        JLabel lblEnglandPanel = new JLabel("Cases in England");
         lblEnglandPanel.setFont(new Font("Courier New", Font.BOLD, 48));
-        lblEngTotalCases = new JLabel("Total Cases: "+engData);
-        lblEngTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
-        lblEngTotalCases.setForeground(Color.RED);
+        lblEnglandPanel.setForeground(new Color(255,255,255));
+        JLabel lblEngTotalCases = new JLabel("Total Cases: "+engData);
+        lblEngTotalCases.setFont(new Font("Courier New", Font.BOLD, 26));
+        lblEngTotalCases.setForeground(new Color(255,204,203));
         JToggleButton BarORPie = new JToggleButton("Bar");
-        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
+        BarORPie.setFont(new Font("Courier New",Font.BOLD, 18));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -554,7 +569,7 @@ public class PwllStem {
 
             }
         });
-        lblEnglandPieChart = new JLabel();
+        JLabel lblEnglandPieChart = new JLabel();
         lblEnglandPieChart.setIcon(new ImageIcon("./Pictures/ENGVariantPieChart.png"));
         c = new GridBagConstraints();
         c.gridx = 0;
@@ -585,14 +600,16 @@ public class PwllStem {
     public static void WALUiInit(){
         // UK Sub UI Initialization
         frameWales = new JFrame("Wales Frame");
-        panelWales = new JPanel(new GridBagLayout());
-        lblWalesPanel = new JLabel("Cases in Wales");
+        JPanel panelWales = new JPanel(new GridBagLayout());
+        panelWales.setBackground(new Color(0,0,0));
+        JLabel lblWalesPanel = new JLabel("Cases in Wales");
         lblWalesPanel.setFont(new Font("Courier New", Font.BOLD, 48));
-        lblWalTotalCases = new JLabel("Total Cases: "+walData);
-        lblWalTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
-        lblWalTotalCases.setForeground(Color.RED);
+        lblWalesPanel.setForeground(new Color(255,255,255));
+        JLabel lblWalTotalCases = new JLabel("Total Cases: "+walData);
+        lblWalTotalCases.setFont(new Font("Courier New", Font.BOLD, 26));
+        lblWalTotalCases.setForeground(new Color(255,204,203));
         JToggleButton BarORPie = new JToggleButton("Bar");
-        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
+        BarORPie.setFont(new Font("Courier New",Font.BOLD, 18));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -635,14 +652,16 @@ public class PwllStem {
     public static void SCOUiInit(){
         // UK Sub UI Initialization
         frameScotland = new JFrame("Scotland Frame");
-        panelScotland = new JPanel(new GridBagLayout());
-        lblScotlandPanel = new JLabel("Cases in Scotland");
+        JPanel panelScotland = new JPanel(new GridBagLayout());
+        panelScotland.setBackground(new Color(0,0,0));
+        JLabel lblScotlandPanel = new JLabel("Cases in Scotland");
         lblScotlandPanel.setFont(new Font("Courier New", Font.BOLD, 48));
-        lblScoTotalCases = new JLabel("Total Cases: "+scoData);
-        lblScoTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
-        lblScoTotalCases.setForeground(Color.RED);
+        lblScotlandPanel.setForeground(new Color(255,255,255));
+        JLabel lblScoTotalCases = new JLabel("Total Cases: "+scoData);
+        lblScoTotalCases.setFont(new Font("Courier New", Font.BOLD, 26));
+        lblScoTotalCases.setForeground(new Color(255,204,203));
         JToggleButton BarORPie = new JToggleButton("Bar");
-        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
+        BarORPie.setFont(new Font("Courier New",Font.BOLD, 18));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -654,7 +673,7 @@ public class PwllStem {
 
             }
         });
-        lblScotlandPieChart = new JLabel();
+        JLabel lblScotlandPieChart = new JLabel();
         lblScotlandPieChart.setIcon(new ImageIcon("./Pictures/SCOVariantPieChart.png"));
         c = new GridBagConstraints();
         c.gridx = 0;
@@ -685,14 +704,16 @@ public class PwllStem {
     public static void NIREUiInit(){
         // UK Sub UI Initialization
         frameNIre = new JFrame("Northern Ireland Frame");
-        panelNire = new JPanel(new GridBagLayout());
-        lblNIrePanel = new JLabel("Cases in Northern Ireland");
+        JPanel panelNire = new JPanel(new GridBagLayout());
+        panelNire.setBackground(new Color(0,0,0));
+        JLabel lblNIrePanel = new JLabel("Cases in N. Ireland");
         lblNIrePanel.setFont(new Font("Courier New", Font.BOLD, 48));
-        lblNIreTotalCases = new JLabel("Total Cases: "+nIreData);
-        lblNIreTotalCases.setFont(new Font("Courier New", Font.PLAIN, 26));
-        lblNIreTotalCases.setForeground(Color.RED);
+        lblNIrePanel.setForeground(new Color(255,255,255));
+        JLabel lblNIreTotalCases = new JLabel("Total Cases: "+nIreData);
+        lblNIreTotalCases.setFont(new Font("Courier New", Font.BOLD, 26));
+        lblNIreTotalCases.setForeground(new Color(255,204,203));
         JToggleButton BarORPie = new JToggleButton("Bar");
-        BarORPie.setFont(new Font("Courier New",Font.PLAIN, 14));
+        BarORPie.setFont(new Font("Courier New",Font.BOLD, 18));
         BarORPie.addChangeListener(event -> {
             if (BarORPie.isSelected()){
                 BarORPie.setText("Pie");
@@ -704,7 +725,7 @@ public class PwllStem {
 
             }
         });
-        lblNIrePieChart = new JLabel();
+        JLabel lblNIrePieChart = new JLabel();
         lblNIrePieChart.setIcon(new ImageIcon("./Pictures/NIREVariantPieChart.png"));
         c = new GridBagConstraints();
         c.gridx = 0;
@@ -747,10 +768,12 @@ public class PwllStem {
         i = 0;
         frameVarTime = new JFrame("Variants over Time 'Frame'");
         JPanel panelVarTime = new JPanel(new GridBagLayout());
+        panelVarTime.setBackground(new Color(0,0,0));
         JLabel lblVarTime = new JLabel("Variants over Time");
         lblVarTime.setFont(new Font("Courier New", Font.BOLD, 48));
+        lblVarTime.setForeground(new Color(255,255,255));
 //        JToggleButton MonthlyorWeekly = new JToggleButton("Weekly");
-//        MonthlyorWeekly.setFont(new Font("Courier New",Font.PLAIN, 14));
+//        MonthlyorWeekly.setFont(new Font("Courier New",Font.BOLD, 18));
 //        MonthlyorWeekly.addChangeListener(event -> {
 //            if (MonthlyorWeekly.isSelected()){
 //                MonthlyorWeekly.setText("Monthly");
@@ -759,11 +782,11 @@ public class PwllStem {
 //            }
 //        });
         btnNext = new JButton(">");
-        btnNext.setFont(new Font("Courier New",Font.BOLD, 14));
+        btnNext.setFont(new Font("Courier New",Font.BOLD, 18));
         btnPrev = new JButton("<");
-        btnPrev.setFont(new Font("Courier New",Font.BOLD, 14));
+        btnPrev.setFont(new Font("Courier New",Font.BOLD, 18));
         lblVarTimeChart = new JLabel();
-        lblVarTimeChart.setIcon(new ImageIcon("./Pictures/2021-quart1-VariantTimeBarChart.png"));
+        lblVarTimeChart.setIcon(icon[0]);
         c = new GridBagConstraints();
         c.gridy = 0;
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -797,7 +820,7 @@ public class PwllStem {
         c.weightx = GridBagConstraints.REMAINDER;
         panelVarTime.add(btnNext, c);
         frameVarTime.add(panelVarTime);
-        frameVarTime.setSize(new Dimension(1400,720));
+        frameVarTime.setSize(new Dimension(1800,720));
 
     }
     public static void VarTimeChartChanger(){
