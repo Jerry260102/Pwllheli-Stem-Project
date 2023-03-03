@@ -5,6 +5,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.knowm.xchart.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.*;
@@ -404,6 +405,39 @@ public class PwllStem {
         BitmapEncoder.saveBitmapWithDPI(barChart2022quart4, "./Pictures/2022-quart4-VariantTimeBarChart", BitmapEncoder.BitmapFormat.PNG, 100);
     }
     public static void mainUiInit() {
+        JFrame framepre = new JFrame("Welcome");
+        JPanel panelpre = new JPanel(new GridBagLayout());
+        panelpre.setBackground(new Color(0,0,0));
+        JLabel lbllbl = new JLabel("What is this?");
+        lbllbl.setFont(new Font("Courier New",Font.BOLD,48));
+        lbllbl.setForeground(new Color(255,255,255));
+        JTextArea lblText= new JTextArea("This app is made to take recent COVID-19 data and display it for you to read!\n" +
+                "Alpha, Delta, and Omicron are variants of COVID-19 and then the rest should be fairly self explanatory.\n" +
+                "Thank you for using this app.");
+        lblText.setBackground(new Color(0,0,0));
+        lblText.setForeground(new Color(255,255,255));
+        lblText.setEditable(false);
+        lblText.setFont(new Font("Courier New",Font.BOLD, 18));
+        JButton btnOK = new JButton("OK");
+        btnOK.setFont(new Font("Courier New",Font.BOLD, 18));
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.anchor = GridBagConstraints.CENTER;
+        panelpre.add(lbllbl,c);
+        c.gridy = 1;
+        panelpre.add(lblText,c);
+        c.gridy = 2;
+        panelpre.add(btnOK,c);
+        framepre.add(panelpre);
+        framepre.setSize(new Dimension(1000, 400));
+        framepre.setLocationRelativeTo(null);
+        framepre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        framepre.setVisible(true);
+
         // Main UI Initialization
         JFrame frameMain = new JFrame("Main Frame");
         JPanel panelMain = new JPanel(new GridBagLayout());
@@ -474,8 +508,11 @@ public class PwllStem {
         frameMain.setSize(new Dimension(1280, 720));
         frameMain.setLocationRelativeTo(null);
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frameMain.setVisible(true);
 
+        btnOK.addActionListener(e -> {
+            framepre.setVisible(false);
+            frameMain.setVisible(true);
+        });
         btnAber.addActionListener(e -> JOptionPane.showMessageDialog(frameMain, "Prifysgol Aberystwyth University is our company sponsor for this project and has been a massive help in our understanding of how genome sequencing and handling big data works.",
                 "INFORMATION", JOptionPane.INFORMATION_MESSAGE));
         btnLlandrillo.addActionListener(e -> JOptionPane.showMessageDialog(frameMain, "We are a group of students from Coleg Meirion-Dwyfor, who have been working on making this application to allow for easy-to-understand representation of data regarding the COVID genome.\nThis application will allow for anyone to read and gain a deeper understanding of how COVID works at any level",
@@ -494,19 +531,7 @@ public class PwllStem {
         lblUKTotalCases.setForeground(new Color(255,204,203));
         JToggleButton BarORPie = new JToggleButton("Bar");
         BarORPie.setFont(new Font("Courier New",Font.BOLD, 18));
-        BarORPie.addChangeListener(event -> {
-            if (BarORPie.isSelected()){
-                BarORPie.setText("Pie");
-                lblVariantUKPieChart.setIcon(new ImageIcon("./Pictures/UKVariantBarChart.png"));
-                lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryBarChart.png"));
 
-            } else {
-                BarORPie.setText("Bar");
-                lblVariantUKPieChart.setIcon(new ImageIcon("./Pictures/UKVariantPieChart.png"));
-                lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryPieChart.png"));
-
-            }
-        });
         JLabel lblCountryUKPieChart = new JLabel();
         lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryPieChart.png"));
         JLabel lblVariantUKPieChart = new JLabel();
@@ -544,6 +569,19 @@ public class PwllStem {
         panelUK.add(lblVariantUKPieChart, c);
         frameUK.add(panelUK);
         frameUK.setSize(new Dimension(1280,720));
+        BarORPie.addChangeListener(event -> {
+            if (BarORPie.isSelected()){
+                BarORPie.setText("Pie");
+                lblVariantUKPieChart.setIcon(new ImageIcon("./Pictures/UKVariantBarChart.png"));
+                lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryBarChart.png"));
+
+            } else {
+                BarORPie.setText("Bar");
+                lblVariantUKPieChart.setIcon(new ImageIcon("./Pictures/UKVariantPieChart.png"));
+                lblCountryUKPieChart.setIcon(new ImageIcon("./Pictures/UKCountryPieChart.png"));
+
+            }
+        });
     }
     public static void ENGUiInit(){
         // UK Sub UI Initialization
